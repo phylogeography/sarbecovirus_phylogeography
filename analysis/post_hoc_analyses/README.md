@@ -13,6 +13,7 @@ The main R script for the subsequent phylogeographic analysis is in the file `R_
 7. Visualising selected continuous phylogeographic reconstructions
 8. Displaying the estimated position of the human ancestor
 9. Visualising all continuous phylogeographic reconstructions
+10. Mapping the bat species richness map on the topographic background
 
 The R script requires the preliminary installation of the following R packages: "adephylo", "diagram", "HDInterval", "lubridate", "maptools", "rgdal", and "seraphim".
 
