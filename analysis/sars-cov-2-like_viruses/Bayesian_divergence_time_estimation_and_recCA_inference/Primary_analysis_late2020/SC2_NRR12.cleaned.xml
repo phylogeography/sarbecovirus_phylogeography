@@ -1,0 +1,751 @@
+<?xml version='1.0' encoding='latin1'?>
+<beast version="1.10.4">
+	
+
+	
+	
+	<taxa id="taxa">
+		<taxon id="OK017806.1">
+			<date value="2021.2465753424658" direction="forwards" units="years" uncertainty="0.08333333333333333" />
+		</taxon>
+		<taxon id="MT040334.1">
+			<date value="2017.0" direction="forwards" units="years" uncertainty="1.0" />
+		</taxon>
+		<taxon id="EPI_ISL_852604">
+			<date value="2010.9287671232876" direction="forwards" units="years" />
+		</taxon>
+		<taxon id="OR233322.1">
+			<date value="2022.8383561643836" direction="forwards" units="years" />
+		</taxon>
+		<taxon id="LC663958.1">
+			<date value="2020.4153005464482" direction="forwards" units="years" uncertainty="0.08333333333333333" />
+		</taxon>
+		<taxon id="OK017805.1">
+			<date value="2021.1616438356164" direction="forwards" units="years" uncertainty="0.08333333333333333" />
+		</taxon>
+		<taxon id="EPI_ISL_412977">
+			<date value="2019.4794520547946" direction="forwards" units="years" />
+		</taxon>
+		<taxon id="MG772933.1">
+			<date value="2017.0849315068492" direction="forwards" units="years" uncertainty="0.08333333333333333" />
+		</taxon>
+		<taxon id="MW251308.1">
+			<date value="2020.464480874317" direction="forwards" units="years" />
+		</taxon>
+		<taxon id="EPI_ISL_852605">
+			<date value="2010.9287671232876" direction="forwards" units="years" />
+		</taxon>
+		<taxon id="LC556375.1">
+			<date value="2013.0" direction="forwards" units="years" uncertainty="1.0" />
+		</taxon>
+		<taxon id="OR233324.1">
+			<date value="2022.8383561643836" direction="forwards" units="years" />
+		</taxon>
+		<taxon id="MN908947.3">
+			<date value="2019.9835616438356" direction="forwards" units="years" />
+		</taxon>
+		<taxon id="OK017803.1">
+			<date value="2021.0849315068492" direction="forwards" units="years" uncertainty="0.08333333333333333" />
+		</taxon>
+		<taxon id="MZ081381.1">
+			<date value="2020.396174863388" direction="forwards" units="years" />
+		</taxon>
+		<taxon id="LC663793.1">
+			<date value="2020.6666666666667" direction="forwards" units="years" uncertainty="0.08333333333333333" />
+		</taxon>
+		<taxon id="KF294457.1">
+			<date value="2012.0" direction="forwards" units="years" uncertainty="1.0" />
+		</taxon>
+		<taxon id="MZ937001.1">
+			<date value="2020.5136612021859" direction="forwards" units="years" />
+		</taxon>
+		<taxon id="OR233323.1">
+			<date value="2022.841095890411" direction="forwards" units="years" />
+		</taxon>
+		<taxon id="MT072864.1">
+			<date value="2018.0" direction="forwards" units="years" uncertainty="1.0" />
+		</taxon>
+		<taxon id="LC663959.1">
+			<date value="2020.6666666666667" direction="forwards" units="years" uncertainty="0.08333333333333333" />
+		</taxon>
+		<taxon id="OR233302.1">
+			<date value="2022.482191780822" direction="forwards" units="years" />
+		</taxon>
+		<taxon id="MT040336.1">
+			<date value="2017.0" direction="forwards" units="years" uncertainty="1.0" />
+		</taxon>
+		<taxon id="MZ937003.1">
+			<date value="2020.5218579234972" direction="forwards" units="years" />
+		</taxon>
+		<taxon id="MZ937002.1">
+			<date value="2020.5136612021859" direction="forwards" units="years" />
+		</taxon>
+		<taxon id="MT121216.1">
+			<date value="2019.2383561643835" direction="forwards" units="years" />
+		</taxon>
+		<taxon id="MG772934.1">
+			<date value="2015.495890410959" direction="forwards" units="years" uncertainty="0.08333333333333333" />
+		</taxon>
+		<taxon id="MT040333.1">
+			<date value="2017.0" direction="forwards" units="years" uncertainty="1.0" />
+		</taxon>
+		<taxon id="MZ937000.1">
+			<date value="2020.5081967213114" direction="forwards" units="years" />
+		</taxon>
+		<taxon id="OR233328.1">
+			<date value="2022.841095890411" direction="forwards" units="years" />
+		</taxon>
+		<taxon id="MN996532.2">
+			<date value="2013.558904109589" direction="forwards" units="years" />
+		</taxon>
+		<taxon id="MT040335.1">
+			<date value="2017.0" direction="forwards" units="years" uncertainty="1.0" />
+		</taxon>
+		<taxon id="MW703458.1">
+			<date value="2018.5808219178082" direction="forwards" units="years" uncertainty="0.08333333333333333" />
+		</taxon>
+		<taxon id="OK017804.1">
+			<date value="2021.0849315068492" direction="forwards" units="years" uncertainty="0.08333333333333333" />
+		</taxon>
+		<taxon id="OQ175343.1">
+			<date value="2018.3506849315067" direction="forwards" units="years" />
+		</taxon>
+		<taxon id="MZ937004.1">
+			<date value="2020.5218579234972" direction="forwards" units="years" />
+		</taxon>
+		<taxon id="OP963576.1">
+			<date value="2018.0" direction="forwards" units="years" uncertainty="1.0" />
+		</taxon>
+		<taxon id="OK287355.1">
+			<date value="2020.1639344262296" direction="forwards" units="years" uncertainty="0.08333333333333333" />
+		</taxon>
+	</taxa>
+
+
+	<taxa id="sc2">
+		<taxon idref="MN908947.3" />
+	</taxa>
+	
+
+	
+	
+	<alignment id="alignment" dataType="nucleotide">
+		<sequence>
+			<taxon idref="OK017806.1" />
+			<!-- Genome sequence for accession OK017806.1 -->
+			</sequence>
+		<sequence>
+			<taxon idref="MT040334.1" />
+			<!-- Genome sequence for accession MT040334.1 -->
+			</sequence>
+		<sequence>
+			<taxon idref="EPI_ISL_852604" />
+			<!-- Genome sequence for accession EPI_ISL_852604 -->
+			</sequence>
+		<sequence>
+			<taxon idref="OR233322.1" />
+			<!-- Genome sequence for accession OR233322.1 -->
+			</sequence>
+		<sequence>
+			<taxon idref="LC663958.1" />
+			<!-- Genome sequence for accession LC663958.1 -->
+			</sequence>
+		<sequence>
+			<taxon idref="OK017805.1" />
+			<!-- Genome sequence for accession OK017805.1 -->
+			</sequence>
+		<sequence>
+			<taxon idref="EPI_ISL_412977" />
+			<!-- Genome sequence for accession EPI_ISL_412977 -->
+			</sequence>
+		<sequence>
+			<taxon idref="MG772933.1" />
+			<!-- Genome sequence for accession MG772933.1 -->
+			</sequence>
+		<sequence>
+			<taxon idref="MW251308.1" />
+			<!-- Genome sequence for accession MW251308.1 -->
+			</sequence>
+		<sequence>
+			<taxon idref="EPI_ISL_852605" />
+			<!-- Genome sequence for accession EPI_ISL_852605 -->
+			</sequence>
+		<sequence>
+			<taxon idref="LC556375.1" />
+			<!-- Genome sequence for accession LC556375.1 -->
+			</sequence>
+		<sequence>
+			<taxon idref="OR233324.1" />
+			<!-- Genome sequence for accession OR233324.1 -->
+			</sequence>
+		<sequence>
+			<taxon idref="MN908947.3" />
+			<!-- Genome sequence for accession MN908947.3 -->
+			</sequence>
+		<sequence>
+			<taxon idref="OK017803.1" />
+			<!-- Genome sequence for accession OK017803.1 -->
+			</sequence>
+		<sequence>
+			<taxon idref="MZ081381.1" />
+			<!-- Genome sequence for accession MZ081381.1 -->
+			</sequence>
+		<sequence>
+			<taxon idref="LC663793.1" />
+			<!-- Genome sequence for accession LC663793.1 -->
+			</sequence>
+		<sequence>
+			<taxon idref="KF294457.1" />
+			<!-- Genome sequence for accession KF294457.1 -->
+			</sequence>
+		<sequence>
+			<taxon idref="MZ937001.1" />
+			<!-- Genome sequence for accession MZ937001.1 -->
+			</sequence>
+		<sequence>
+			<taxon idref="OR233323.1" />
+			<!-- Genome sequence for accession OR233323.1 -->
+			</sequence>
+		<sequence>
+			<taxon idref="MT072864.1" />
+			<!-- Genome sequence for accession MT072864.1 -->
+			</sequence>
+		<sequence>
+			<taxon idref="LC663959.1" />
+			<!-- Genome sequence for accession LC663959.1 -->
+			</sequence>
+		<sequence>
+			<taxon idref="OR233302.1" />
+			<!-- Genome sequence for accession OR233302.1 -->
+			</sequence>
+		<sequence>
+			<taxon idref="MT040336.1" />
+			<!-- Genome sequence for accession MT040336.1 -->
+			</sequence>
+		<sequence>
+			<taxon idref="MZ937003.1" />
+			<!-- Genome sequence for accession MZ937003.1 -->
+			</sequence>
+		<sequence>
+			<taxon idref="MZ937002.1" />
+			<!-- Genome sequence for accession MZ937002.1 -->
+			</sequence>
+		<sequence>
+			<taxon idref="MT121216.1" />
+			<!-- Genome sequence for accession MT121216.1 -->
+			</sequence>
+		<sequence>
+			<taxon idref="MG772934.1" />
+			<!-- Genome sequence for accession MG772934.1 -->
+			</sequence>
+		<sequence>
+			<taxon idref="MT040333.1" />
+			<!-- Genome sequence for accession MT040333.1 -->
+			</sequence>
+		<sequence>
+			<taxon idref="MZ937000.1" />
+			<!-- Genome sequence for accession MZ937000.1 -->
+			</sequence>
+		<sequence>
+			<taxon idref="OR233328.1" />
+			<!-- Genome sequence for accession OR233328.1 -->
+			</sequence>
+		<sequence>
+			<taxon idref="MN996532.2" />
+			<!-- Genome sequence for accession MN996532.2 -->
+			</sequence>
+		<sequence>
+			<taxon idref="MT040335.1" />
+			<!-- Genome sequence for accession MT040335.1 -->
+			</sequence>
+		<sequence>
+			<taxon idref="MW703458.1" />
+			<!-- Genome sequence for accession MW703458.1 -->
+			</sequence>
+		<sequence>
+			<taxon idref="OK017804.1" />
+			<!-- Genome sequence for accession OK017804.1 -->
+			</sequence>
+		<sequence>
+			<taxon idref="OQ175343.1" />
+			<!-- Genome sequence for accession OQ175343.1 -->
+			</sequence>
+		<sequence>
+			<taxon idref="MZ937004.1" />
+			<!-- Genome sequence for accession MZ937004.1 -->
+			</sequence>
+		<sequence>
+			<taxon idref="OP963576.1" />
+			<!-- Genome sequence for accession OP963576.1 -->
+			</sequence>
+		<sequence>
+			<taxon idref="OK287355.1" />
+			<!-- Genome sequence for accession OK287355.1 -->
+			</sequence>
+	</alignment>
+	
+	
+
+	
+	
+	<patterns id="patterns" from="1" unique="false">
+		<alignment idref="alignment" />
+	</patterns>
+	
+
+	
+	
+	<constantSize id="initialDemo" units="years">
+		<populationSize>
+			<parameter id="initialDemo.popSize" value="100.0" />
+		</populationSize>
+	</constantSize>
+	
+
+	
+	<coalescentSimulator id="startingTree">
+		<taxa idref="taxa" />
+		<constantSize idref="initialDemo" />
+	</coalescentSimulator>
+	
+
+	
+	<treeModel id="treeModel">
+		<coalescentTree idref="startingTree" />
+		<rootHeight>
+			<parameter id="treeModel.rootHeight" />
+		</rootHeight>
+		<nodeHeights internalNodes="true">
+			<parameter id="treeModel.internalNodeHeights" />
+		</nodeHeights>
+		<nodeHeights internalNodes="true" rootNode="true">
+			<parameter id="treeModel.allInternalNodeHeights" />
+		</nodeHeights>
+	</treeModel>
+
+	
+	<treeLengthStatistic id="treeLength">
+		<treeModel idref="treeModel" />
+	</treeLengthStatistic>
+
+	
+	<tmrcaStatistic id="age(root)" absolute="true">
+		<treeModel idref="treeModel" />
+	</tmrcaStatistic>
+
+	
+	<treeHeightStatistic id="rootHeight">
+		<treeModel idref="treeModel" />
+	</treeHeightStatistic>
+	
+
+	
+	
+	<tmrcaStatistic id="tmrca(sc2)" absolute="false" includeStem="true">
+		<mrca>
+			<taxa idref="sc2" />
+		</mrca>
+		<treeModel idref="treeModel" />
+	</tmrcaStatistic>
+	<tmrcaStatistic id="age(sc2)" absolute="true" includeStem="true">
+		<mrca>
+			<taxa idref="sc2" />
+		</mrca>
+		<treeModel idref="treeModel" />
+	</tmrcaStatistic>
+	
+
+	
+	<gmrfSkyGridLikelihood id="skygrid">
+		<populationSizes>
+
+			
+			<parameter id="skygrid.logPopSize" dimension="50" value="1.0" />
+		</populationSizes>
+		<precisionParameter>
+			<parameter id="skygrid.precision" value="0.1" lower="0.0" />
+		</precisionParameter>
+		<numGridPoints>
+			<parameter id="skygrid.numGridPoints" value="49.0" />
+		</numGridPoints>
+		<cutOff>
+			<parameter id="skygrid.cutOff" value="1000.0" />
+		</cutOff>
+
+ 		<intervals>
+            <bigFastTreeIntervals id="bigFastTreeIntervals">
+                <treeModel idref="treeModel" />
+            </bigFastTreeIntervals>
+		</intervals>
+	</gmrfSkyGridLikelihood>
+
+	
+	<gammaPrior id="skygrid.precision.prior" shape="0.001" scale="1000.0" offset="0.0">
+		<parameter idref="skygrid.precision" />
+	</gammaPrior>
+
+	<compoundParameter id="skygrid.parameters">
+		<parameter idref="skygrid.precision" />
+		<parameter idref="skygrid.logPopSize" />
+	</compoundParameter>
+
+	<gmrfSkyrideGradient id="gmrfGradientPop" wrtParameter="logPopulationSizes" gradientCheckTolerance="0.1">
+		<gmrfSkyGridLikelihood idref="skygrid" />
+	</gmrfSkyrideGradient>
+
+	<gmrfSkyrideGradient id="gmrfGradientPrec" wrtParameter="precision">
+		<gmrfSkyGridLikelihood idref="skygrid" />
+	</gmrfSkyrideGradient>
+
+	<jointGradient id="joint.skygrid.precision">
+		<gmrfSkyrideGradient idref="gmrfGradientPrec" />
+		<gradient>
+			<gammaPrior idref="skygrid.precision.prior" />
+			<parameter idref="skygrid.precision" />
+		</gradient>
+	</jointGradient>
+
+	<compoundGradient id="full.skygrid.gradient">
+		<jointGradient idref="joint.skygrid.precision" />
+		<gmrfSkyrideGradient idref="gmrfGradientPop" />
+	</compoundGradient>
+
+
+	
+	
+
+
+
+	
+	
+	<distributionLikelihood id="intercept.prior">
+		<data>
+			<parameter id="intercept" value="-7.788955333780917" />
+		</data>
+		<distribution>
+			<normalDistributionModel>
+				<mean>
+					
+					<parameter value="-7.788955333780917" />
+				</mean>
+				<stdev>
+					<parameter value="0.16552635496534787" />
+				</stdev>
+			</normalDistributionModel>
+		</distribution>
+	</distributionLikelihood>
+
+	<compoundParameter id="fixedEffects">
+		<parameter idref="intercept" />
+	</compoundParameter>
+
+	<fixedEffects id="fixedEffectsModel" timeEffect="false">
+		<treeModel idref="treeModel" />
+		<compoundParameter idref="fixedEffects" />
+		<signTransform />
+	</fixedEffects>
+
+	<arbitraryBranchRates id="branchRates" reciprocal="false" exp="false" centerAtOne="false">
+			<rates>
+					<parameter id="clock.rates" value="1" lower="0.0" />
+			</rates>
+			<scale>
+				<parameter id="clock.scale" value="0.3333" lower="0.0" /> 
+			</scale>
+			<location>
+					<fixedEffects idref="fixedEffectsModel" />
+			</location>
+			<treeModel idref="treeModel" />
+	</arbitraryBranchRates>
+
+	<distributionLikelihood id="clock.scale.prior">
+		<data>
+			<parameter idref="clock.scale" />
+		</data>
+		<distribution>
+			<exponentialDistributionModel>
+				<mean>
+					<parameter value="0.333333" />
+				</mean>
+			</exponentialDistributionModel>
+		</distribution>
+	</distributionLikelihood>
+
+	
+	
+	<distributionLikelihood id="ratesPrior">
+			<data>
+					<parameter idref="clock.rates" />
+			</data>
+			<distribution>
+					<logNormalDistributionModel meanInRealSpace="true">
+							<mean>
+									<parameter value="1.0" lower="0.0" />
+							</mean>
+							<stdev>
+									<parameter value="1.0" lower="0.0" />
+							</stdev>
+					</logNormalDistributionModel>
+			</distribution>
+	</distributionLikelihood>
+
+
+	
+	<gtrModel id="gtr">
+		<frequencies>
+			<frequencyModel dataType="nucleotide">
+				<alignment idref="alignment" />
+				<frequencies>
+					<parameter id="frequencies" dimension="4" />
+				</frequencies>
+			</frequencyModel>
+		</frequencies>
+		<rates>
+			<parameter id="gtr.rates" dimension="6" value="1.0" lower="0.0" />
+		</rates>
+	</gtrModel>
+
+	
+	<siteModel id="siteModel">
+		<substitutionModel>
+			<gtrModel idref="gtr" />
+		</substitutionModel>
+		<gammaShape gammaCategories="4">
+			<parameter id="alpha" value="0.5" lower="0.0" />
+		</gammaShape>
+	</siteModel>
+
+	
+	<statistic id="mu" name="mu">
+		<siteModel idref="siteModel" />
+	</statistic>
+	
+
+	
+	
+
+	
+	<treeDataLikelihood id="treeLikelihood" useAmbiguities="false" usePreOrder="true">
+		<partition>
+			<patterns idref="patterns" />
+		<siteModel idref="siteModel" />
+		</partition>
+		<treeModel idref="treeModel" />
+		<arbitraryBranchRates idref="branchRates" />
+	</treeDataLikelihood>
+
+
+	
+	<gmrfSkyrideGradient id="skyrideGradientWrtNodeHeight" wrtParameter="nodeHeight" gradientCheckTolerance="0.1">
+		<gmrfSkyrideLikelihood idref="skygrid" />
+	</gmrfSkyrideGradient>
+
+	<jointGradient id="jointGradient">
+		<hessian>
+			<distributionLikelihood idref="ratesPrior" />
+			<parameter idref="clock.rates" />
+		</hessian>
+		<branchRateGradient id="branchRateGradient" traitName="Sequence">
+			<treeDataLikelihood idref="treeLikelihood" />
+		</branchRateGradient>
+	</jointGradient>
+
+	<jointGradient id="jointNodeHeightGradient">
+		<gmrfSkyrideGradient idref="skyrideGradientWrtNodeHeight" />
+		<nodeHeightGradient id="nodeHeightGradient" traitName="Sequence">
+			<treeDataLikelihood idref="treeLikelihood" />
+		</nodeHeightGradient>
+	</jointGradient>
+
+	<nodeHeightTransform id="fullRatioRealLineTransform" withRoot="true">
+		<tree idref="treeModel" />
+		<arbitraryBranchRates idref="branchRates" />
+		<ratios realLine="true">
+			<parameter id="nodeHeight.ratios" />
+		</ratios>
+	</nodeHeightTransform>
+
+	<nodeHeightProxyParameter id="nodeHeightProxyParameter" rootNode="true">
+		<tree idref="treeModel" />
+	</nodeHeightProxyParameter>
+	
+	<ratioMasker id="ratioMasker.withRoot" ratioThreshold="1E-4" heightThreshold="1E-4">
+		<mask>
+			<parameter id="ratio.withRoot.mask" />
+		</mask>
+		<treeModel idref="treeModel" />
+		<nodeHeightTransform idref="fullRatioRealLineTransform" />
+	</ratioMasker>
+	
+
+	
+	<operators id="operators" optimizationSchedule="log">
+		<deltaExchange delta="0.01" weight="1">
+			<parameter idref="gtr.rates" />
+		</deltaExchange>
+		<scaleOperator scaleFactor="0.75" weight="1">
+			<parameter idref="alpha" />
+		</scaleOperator>
+		
+		
+		
+		<subtreeSlide size="1.0" gaussian="true" weight="30">
+			<treeModel idref="treeModel" />
+		</subtreeSlide>
+		<narrowExchange weight="30">
+			<treeModel idref="treeModel" />
+		</narrowExchange>
+		<wideExchange weight="3">
+			<treeModel idref="treeModel" />
+		</wideExchange>
+		<wilsonBalding weight="3">
+			<treeModel idref="treeModel" />
+		</wilsonBalding>
+		<scaleOperator scaleFactor="0.75" weight="3">
+			<parameter idref="treeModel.rootHeight" />
+		</scaleOperator>
+		<scaleOperator scaleFactor="0.75" weight="3">
+			<parameter idref="clock.scale" />
+		</scaleOperator>
+		<uniformOperator weight="3">
+			<parameter idref="treeModel.internalNodeHeights" />
+		</uniformOperator>
+		<gmrfGridBlockUpdateOperator scaleFactor="1.0" weight="2">
+			<gmrfSkyrideLikelihood idref="skygrid" />
+		</gmrfGridBlockUpdateOperator>
+		<scaleOperator scaleFactor="0.75" weight="1">
+			<parameter idref="skygrid.precision" />
+		</scaleOperator>
+		<randomWalkOperator windowSize="0.1" weight="3">
+			<parameter idref="intercept" />
+		</randomWalkOperator>
+
+		<transformedMultivariateHamiltonianMonteCarlo weight="1.0" nSteps="4" stepSize="1E-3" mode="vanilla" instabilityHandler="reject" drawVariance="1.0" autoOptimize="true" targetAcceptanceProbability="0.2" preconditioning="adaptiveDiagonal" preconditioningDelay="200" preconditioningUpdateFrequency="10">
+				<jointGradient idref="jointNodeHeightGradient" />
+				<nodeHeightProxyParameter idref="nodeHeightProxyParameter" />
+				<nodeHeightTransform idref="fullRatioRealLineTransform" />
+				<ratioMasker idref="ratioMasker.withRoot" />
+		</transformedMultivariateHamiltonianMonteCarlo>
+
+
+		<hamiltonianMonteCarloOperator weight="1" nSteps="4" stepSize="1E-2" mode="vanilla" drawVariance="1.0" autoOptimize="true" preconditioning="diagonal" preconditioningDelay="0" preconditioningUpdateFrequency="10">
+				<jointGradient idref="jointGradient" />
+				<parameter idref="clock.rates" />
+				<signTransform>
+						<parameter idref="clock.rates" />
+				</signTransform>
+		</hamiltonianMonteCarloOperator>
+
+		<hamiltonianMonteCarloOperator weight="1.0" nSteps="50" stepSize="1E-2" mode="vanilla" autoOptimize="true" gradientCheckCount="10000" gradientCheckTolerance="1E-1" preconditioning="diagonal" preconditioningUpdateFrequency="100">
+		 		<compoundGradient idref="full.skygrid.gradient" />
+				<compoundParameter idref="skygrid.parameters" />
+				<signTransform start="1" end="1">
+						<compoundParameter idref="skygrid.parameters" />
+				</signTransform>
+ 		</hamiltonianMonteCarloOperator>
+	</operators>
+	
+
+	
+	<mcmc id="mcmc" chainLength="20000000" autoOptimize="true" operatorAnalysis="SC2_NRR12_hmm.edit.ops">
+		<joint id="joint">
+			<prior id="prior">
+				<dirichletPrior alpha="1.0" sumsTo="6.0">
+					<parameter idref="gtr.rates" />
+				</dirichletPrior>
+				<exponentialPrior mean="0.5" offset="0.0">
+					<parameter idref="alpha" />
+				</exponentialPrior>
+				
+				<gammaPrior idref="skygrid.precision.prior" /> 
+				<gmrfSkyGridLikelihood idref="skygrid" />
+				
+				<arbitraryBranchRates idref="branchRates" />
+				<distributionLikelihood idref="intercept.prior" />
+				<distributionLikelihood idref="clock.scale.prior" />
+				<distributionLikelihood idref="ratesPrior" />
+			</prior>
+			<likelihood id="likelihood">
+				<treeDataLikelihood idref="treeLikelihood" />
+			</likelihood>
+		</joint>
+		<operators idref="operators" />
+
+		
+		<log id="screenLog" logEvery="2000">
+			<column label="Joint" dp="4" width="12">
+				<joint idref="joint" />
+			</column>
+			<column label="Prior" dp="4" width="12">
+				<prior idref="prior" />
+			</column>
+			<column label="Likelihood" dp="4" width="12">
+				<likelihood idref="likelihood" />
+			</column>
+			<column label="age(root)" sf="6" width="12">
+				<tmrcaStatistic idref="age(root)" />
+			</column>
+			
+		</log>
+
+		
+		<log id="fileLog" logEvery="2000" fileName="SC2_NRR12_hmm.edit.log" overwrite="false">
+			<joint idref="joint" />
+			<prior idref="prior" />
+			<likelihood idref="likelihood" />
+			<parameter idref="treeModel.rootHeight" />
+			<tmrcaStatistic idref="age(root)" />
+			<treeLengthStatistic idref="treeLength" />
+			<tmrcaStatistic idref="tmrca(sc2)" />
+			<tmrcaStatistic idref="age(sc2)" />
+			<parameter idref="skygrid.precision" />
+			<parameter idref="skygrid.logPopSize" />
+			<parameter idref="skygrid.cutOff" />
+			<parameter idref="gtr.rates" />
+			<parameter idref="alpha" />
+			<parameter idref="intercept" />
+			<parameter idref="clock.scale" />
+			
+			
+			
+			
+			<treeDataLikelihood idref="treeLikelihood" />
+			
+			<arbitraryBranchRates idref="branchRates" />
+			<gmrfSkyGridLikelihood idref="skygrid" />
+		</log>
+
+		
+		<logTree id="treeFileLog" logEvery="2000" nexusFormat="true" fileName="SC2_NRR12_hmm.edit.trees" sortTranslationTable="true">
+			<treeModel idref="treeModel" />
+			<trait name="rate" tag="rate">
+				
+				<arbitraryBranchRates idref="branchRates" />
+			</trait>
+			<joint idref="joint" />
+
+			<trait name="states" traitName="states">
+				<treeModel idref="treeModel" />
+				<ancestralTreeLikelihood id="asrLikelihood" useAmbiguities="false" stateTagName="states">
+					
+					<patterns idref="patterns" />
+					<treeModel idref="treeModel" />
+					<siteModel idref="siteModel" />
+					<arbitraryBranchRates idref="branchRates" />
+				</ancestralTreeLikelihood>
+			</trait>
+
+			
+			
+
+			
+		</logTree>
+	</mcmc>
+	
+	<report>
+		<property name="timer">
+			<mcmc idref="mcmc" />
+		</property>
+	</report>
+	
+</beast>
