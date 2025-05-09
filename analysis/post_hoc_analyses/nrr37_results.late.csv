@@ -1,0 +1,9 @@
+analysis,method,trees used/burnin,median (95% HPD)
+phylogeography,mcc; sc2 parent height,10% burnin,"16.59 (9.46, 55.51)"
+phylogeography,mcc; sc2 parent height,last 100 trees,"67.00 (37.47, 104.95)"
+phylodynamics,mcc; sc2 parent height,10% burnin,"8.91 (3.58, 18.48)"
+phylodynamics,mcc; sc2 parent height,last 100 trees,"9.21 (7.22, 12.64)"
+phylogeography,trees; sc2 branch length,10% burnin,"38.54 (1.07, 96.46)"
+phylogeography,trees; sc2 branch length,last 100 trees,"38.60 (1.32, 107.83)"
+phylodynamics,trees; sc2 branch length,10% burnin,"5.96 (0.10, 17.90)"
+phylodynamics,trees; sc2 branch length,last 100 trees,"5.43 (0.16, 17.35)"

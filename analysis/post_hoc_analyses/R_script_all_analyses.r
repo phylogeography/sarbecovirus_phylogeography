@@ -23,14 +23,19 @@ source("Tree_data_extraction2.r")
 writingFiles = TRUE; showingPlots = TRUE
 writingFiles = FALSE; showingPlots = FALSE
 
-analysis = "Analyses_2023-01-11"; clades = c("SC1","SC2") # analyses performed for the 1° submission
-analysis = "Analyses_2023-10-18"; clades = c("SC2") # analyses performed with the clock rate of the 1° submission but including two ghost sequences
-analysis = "Analyses_2023-10-19"; clades = c("SC2_noGhost","SC2_ghosts") # analyses based on the new rate priors based on the late 2020 data
-analysis = "Analyses_2023-11-27"; clades = c("SC1_prior_stdevDiv5_2ghosts_combined_1-4",											 "SC1_prior_stdevDiv5_Comb1-10",											 "SC2_rateEarly2020_relrate_rootConst",											 "SC2_rateEarly2020_relrate_rootConst_2ghosts",											 "SC2_rateLate2020_relRate_rootConst",											 "SC2_rateLate2020_relrate_rootConst_2ghosts")
-analysis = "Analyses_2023-12-08"; clades = c("SC1","SC2") # new analyses for the visualisations (n.b.:)
+analysis = "Analyses_2024-10-09"; clades = c("SC1_prior_stdevDiv5_2ghosts_combined_1-4",
+											 "SC1_prior_stdevDiv5_Comb1-10",
+											 "SC1_rate1_combined1-4",
+											 "SC2_rate1_noRelRate_rootConst",
+											 "SC2_rateEarly2020_relrate_rootConst",
+											 "SC2_rateEarly2020_relrate_rootConst_2ghosts",
+											 "SC2_rateLate2020_relRate_rootConst",
+											 "SC2_rateLate2020_relrate_rootConst_2ghosts")
+analysis = "Analyses_2024-10-09"; clades = c("SC1","SC2_late","SC2_early") # new analyses for the visualisations
 											# for SC1, "timeTrees" correspond to "SC1_prior_stdevDiv5_Comb1-10", and
-											# for SC2, "timeTrees" correspond to "SC2_rateLate2020_relRate_rootConst") 
-burnIn = 0; selected_NRRs = c("NRR14","NRR3"); mostRecentSamplingDates = c(2021.534, 2021.285)
+											# for SC2 (late), "timeTrees" correspond to "SC2_rateLate2020_relRate_rootConst"
+
+burnIn = 0; selected_NRRs = c("NRR14","NRR37"); mostRecentSamplingDates = c(2021.534, 2022.841)
 
 humanPangolinSeqs = c("AY394995.1", # human sequence (SC1)
 					  "MT040333.1","MT040334.1","MT040335.1","MT040336.1","MT072864.1", # "pangolin" clade (SC1)
@@ -42,7 +47,7 @@ humanPangolinSeqs = c("AY394995.1", # human sequence (SC1)
 renameFiles = FALSE
 if (renameFiles) # has to be ran several times until no warnings are logged
 	{
-		directories1 = list.files(analysis)
+		directories1 = list.files(analysis); directories1 = clades
 		for (i in 1:length(directories1))
 			{
 				directories2 = list.files(paste0(analysis,"/",directories1[i]))
@@ -55,15 +60,34 @@ if (renameFiles) # has to be ran several times until no warnings are logged
 								for (l in 1:length(files))
 									{
 										file = paste0(analysis,"/",directories1[i],"/",directories2[j],"/",directories3[k],"/",files[l])
-										if (grepl("SC1.SC1",file)) file.rename(file, gsub("SC1.SC1","SC1",file))
-										if (grepl("SC2.SC2",file)) file.rename(file, gsub("SC2.SC2","SC2",file))
-										if (grepl("MCC_",file)) file.rename(file, gsub("MCC_","",file))
-										if (grepl(".MCC.tre",file)) file.rename(file, gsub(".MCC.tre","_t.tree",file))
-										if (grepl("PoWTransformed_",file)) file.rename(file, gsub("PoWTransformed_","",file))
-										if (grepl("\\.rates\\.",file)) file.rename(file, gsub("\\.rates\\.","_rates_",file))
-										if (grepl("_rates_",file)) file.rename(file, gsub("_rates_","_WLDV_",file))
-										if (grepl("\\.diffusionCoefficient\\.",file)) file.rename(file, gsub("\\.diffusionCoefficient\\.","_WDC_",file))
+										# if (grepl("PoWTransformed_",file)) file.rename(file, gsub("PoWTransformed_","",file))
+										# if (grepl("sampled_",file)) file.rename(file, gsub("sampled_","",file))
+										# if (grepl("SC2early_",file)) file.rename(file, gsub("SC2early_","SC2_",file))
+										# if (grepl("SC2late_",file)) file.rename(file, gsub("SC2late_","SC2_",file))
 										if (grepl("\\.burninCombinedResampled.more",file)) file.rename(file, gsub("\\.burninCombinedResampled.more","",file))
+										if (grepl("\\.burninCombinedResampled.pruned",file)) file.rename(file, gsub("\\.burninCombinedResampled.pruned","",file))
+										if (grepl("\\.burninCombinedResampled",file)) file.rename(file, gsub("\\.burninCombinedResampled","",file))
+										if (directories3[k] == "strictClock")
+											{
+												if ((grepl(".trees",file))&(!grepl("_a.trees",file))) file.rename(file, gsub(".trees","_a.trees",file))
+											}
+									}
+							}
+					}
+			}
+		directories1 = list.files(analysis); directories1 = clades
+		for (i in 1:length(directories1))
+			{
+				directories2 = list.files(paste0(analysis,"/",directories1[i]))
+				for (j in 1:length(directories2))
+					{
+						directories3 = list.files(paste0(analysis,"/",directories1[i],"/",directories2[j]))
+						for (k in 1:length(directories3))
+							{
+								files = list.files(paste0(analysis,"/",directories1[i],"/",directories2[j],"/",directories3[k]))
+								for (l in 1:length(files))
+									{
+										file = paste0(analysis,"/",directories1[i],"/",directories2[j],"/",directories3[k],"/",files[l])
 										if (directories3[k] == "strictClock")
 											{
 												if ((grepl(".trees",file))&(!grepl("_a.trees",file))) file.rename(file, gsub(".trees","_a.trees",file))
@@ -160,6 +184,32 @@ for (i in 1:length(directories1)) # to retrieve and annotate the MCC trees for t
 								file = paste0(analysis,"/",directories1[i],"/",directories2[j],"/",directories3[k],"/",files[l])
 								if ((!is.null(extension))&&(!is.na(extension))&&(extension == "trees"))
 									{
+										if ((directories3[k] == "transPoW")&(grepl(".trees",file)))
+											{
+												file1 = file; file2 = gsub(".trees",".tree",file)
+												system(paste0("BEAST_1104_program/bin/treeannotator -burninTrees 0 -heights keep -hpd2D 0.8 ",file1," ",file2), ignore.stdout=F, ignore.stderr=F)
+											}
+									}
+							}
+					}
+			}
+	}
+for (i in 1:length(directories1))
+	{
+		directories2 = list.files(paste0(analysis,"/",directories1[i]))
+		for (j in 1:length(directories2))
+			{
+				directories3 = list.files(paste0(analysis,"/",directories1[i],"/",directories2[j]))
+				directories3 = directories3[which((!grepl("statistics",directories3))&(!grepl(".txt",directories3)))]
+				for (k in 1:length(directories3))
+					{
+						files = list.files(paste0(analysis,"/",directories1[i],"/",directories2[j],"/",directories3[k]))
+						for (l in 1:length(files))
+							{
+								extension = unlist(strsplit(files[l],"\\."))[length(unlist(strsplit(files[l],"\\.")))]
+								file = paste0(analysis,"/",directories1[i],"/",directories2[j],"/",directories3[k],"/",files[l])
+								if ((!is.null(extension))&&(!is.na(extension))&&(extension == "trees"))
+									{
 										txt = scan(file, what="", sep="\n", quiet=T, blank.lines.skip=F)
 										if ((txt[length(txt)]!="End;")&(txt[length(txt)]!="END;"))
 											{
@@ -202,18 +252,11 @@ for (i in 1:length(directories1)) # to retrieve and annotate the MCC trees for t
 												system(paste0("BEAST_1104_program/bin/treeannotator -burninTrees 0 -heights keep -hpd2D 0.8 -target ",file3," ",file1," ",file2), 
 													   ignore.stdout=F, ignore.stderr=F)
 											}
-										if ((directories3[k] == "transPoW")&(grepl(".trees",file)))
-											{
-												file1 = file; file2 = gsub(".trees",".tree",file)
-												system(paste0("BEAST_1104_program/bin/treeannotator -burninTrees 0 -heights keep -hpd2D 0.8 ",file1," ",file2),
-													   ignore.stdout=F, ignore.stderr=F)
-											}
 									}
 							}
 					}
 			}
 	}
-directories1 = list.files(analysis)
 for (i in 1:length(directories1)) # to extract the spatio-temporal information embedded in all MCC and posterior trees
 	{
 		prefix = unlist(strsplit(directories1[i],"_"))[1]
@@ -258,7 +301,7 @@ for (i in 1:length(directories1)) # to extract the spatio-temporal information e
 								if (extension == "tree")
 									{
 										tree1a = readAnnotatedNexus(file); tree1b = read.nexus(file)
-										n_tips = length(tree1a$tip.label); n_splits = (2*n_tips)-3-n_tips
+										n_tips = length(tree1a$tip.label); n_splits = (2*n_tips)-3-n_tips; n_splits = (2*n_tips)-2-n_tips
 										if (directories3[k] == "strictClock")
 											{
 												temp = gsub("strictClock","transPoW",gsub("_b.tree",".tree",file))
@@ -272,7 +315,9 @@ for (i in 1:length(directories1)) # to extract the spatio-temporal information e
 												if (sum(tree1b$edge == tree2b$edge) != (dimensions[1]*dimensions[2]))
 													{
 														# print(c(i,j,k,l,m))
-													}
+													}	# For a visual comparison:
+												# plot(tree1a, use.edge.length=F)
+												# plot(tree2a, use.edge.length=F)
 												tree1a$edge = tree2a$edge # NEW !!
 											}
 										tab = Tree_data_extraction1(tree1a, mostRecentSamplingDatum)
@@ -324,7 +369,9 @@ for (i in 1:length(directories1)) # to extract the spatio-temporal information e
 															{
 																print(c(i,j,k,l,m))
 															}
-														buffer[[m]] = allTrees1a[[index]]
+														buffer[[m]] = allTrees1a[[index]] # par(mfrow=c(1,2))
+														# plot(allTrees1a[[index]], use.edge.length=F)
+														# plot(allTrees2a[[m]], use.edge.length=F)
 														buffer[[m]]$edge = allTrees2a[[m]]$edge # NEW !!
 														names(buffer)[m] = names(allTrees2a)[m]
 													}
@@ -344,7 +391,7 @@ for (i in 1:length(directories1)) # to extract the spatio-temporal information e
 															# }
 														# allTrees1a = allTrees1a[indices]
 													# }	else	{
-														allTrees1a = allTrees1a[(length(allTrees1a)-99):(length(allTrees1a))] # to take the last 100 trees (assuring the remove the burn-in)
+														allTrees1a = allTrees1a[(length(allTrees1a)-99):(length(allTrees1a))] # to take the last 100 trees (assuring to remove the burn-in)
 													# }
 											}
 										for (m in 1:length(allTrees1a))
@@ -357,7 +404,6 @@ for (i in 1:length(directories1)) # to extract the spatio-temporal information e
 					}
 			}
 	}
-directories1 = list.files(analysis)
 for (i in 1:length(directories1)) # to import the continuous phylogeographic annotations within the PoW-transformed trees
 	{
 		directories2 = list.files(paste0(analysis,"/",directories1[i]))
@@ -365,48 +411,50 @@ for (i in 1:length(directories1)) # to import the continuous phylogeographic ann
 			{
 				directories3 = list.files(paste0(analysis,"/",directories1[i],"/",directories2[j]))
 				directories3 = directories3[which(grepl("transPoW",directories3))]
-				for (k in 1:length(directories3))
+				if (length(directories3) > 0)
 					{
-						files1 = list.files(paste0(analysis,"/",directories1[i],"/",directories2[j],"/",directories3[k]))
-						for (l in 1:length(files1))
+						for (k in 1:length(directories3))
 							{
-								extension = unlist(strsplit(files1[l],"\\."))[length(unlist(strsplit(files1[l],"\\.")))]
-								file = paste0(analysis,"/",directories1[i],"/",directories2[j],"/",directories3[k],"/",files1[l])
-								if (extension == "csv")
+								files1 = list.files(paste0(analysis,"/",directories1[i],"/",directories2[j],"/",directories3[k]))
+								for (l in 1:length(files1))
 									{
-										tab1 = read.csv(file, head=T)
-										temp = gsub("transPoW","strictClock",gsub("_1.csv","_b_1.csv",file))
-										tab2 = read.csv(temp, head=T)
-										for (n in 1:dim(tab1)[1])
+										extension = unlist(strsplit(files1[l],"\\."))[length(unlist(strsplit(files1[l],"\\.")))]
+										file = paste0(analysis,"/",directories1[i],"/",directories2[j],"/",directories3[k],"/",files1[l])
+										if (extension == "csv")
 											{
-												index = which((tab2[,"node1"]==tab1[n,"node1"])&(tab2[,"node2"]==tab1[n,"node2"]))
-												tab1[n,"startLon"] = tab2[index,"startLon"]; tab1[n,"startLat"] = tab2[index,"startLat"]
-												tab1[n,"endLon"] = tab2[index,"endLon"]; tab1[n,"endLat"] = tab2[index,"endLat"]
-											}
-										write.csv(tab1, file, row.names=F, quote=F)
-									}
-								if (grepl("_ext1",file))
-									{
-										files2 = list.files(file)
-										for (m in 1:length(files2))
-											{
-												tab1 = read.csv(paste0(file,"/",files2[m]), head=T)
-												temp = gsub("transPoW","strictClock",gsub("_ext1","_b_ext1",file))
-												tab2 = read.csv(paste0(temp,"/",files2[m]), head=T)
+												tab1 = read.csv(file, head=T)
+												temp = gsub("transPoW","strictClock",gsub("_1.csv","_b_1.csv",file))
+												tab2 = read.csv(temp, head=T)
 												for (n in 1:dim(tab1)[1])
 													{
 														index = which((tab2[,"node1"]==tab1[n,"node1"])&(tab2[,"node2"]==tab1[n,"node2"]))
 														tab1[n,"startLon"] = tab2[index,"startLon"]; tab1[n,"startLat"] = tab2[index,"startLat"]
 														tab1[n,"endLon"] = tab2[index,"endLon"]; tab1[n,"endLat"] = tab2[index,"endLat"]
 													}
-												write.csv(tab1, paste0(file,"/",files2[m]), row.names=F, quote=F)
+												write.csv(tab1, file, row.names=F, quote=F)
+											}
+										if (grepl("_ext1",file))
+											{
+												files2 = list.files(file)
+												for (m in 1:length(files2))
+													{
+														tab1 = read.csv(paste0(file,"/",files2[m]), head=T)
+														temp = gsub("transPoW","strictClock",gsub("_ext1","_b_ext1",file))
+														tab2 = read.csv(paste0(temp,"/",files2[m]), head=T)
+														for (n in 1:dim(tab1)[1])
+															{
+																index = which((tab2[,"node1"]==tab1[n,"node1"])&(tab2[,"node2"]==tab1[n,"node2"]))
+																tab1[n,"startLon"] = tab2[index,"startLon"]; tab1[n,"startLat"] = tab2[index,"startLat"]
+																tab1[n,"endLon"] = tab2[index,"endLon"]; tab1[n,"endLat"] = tab2[index,"endLat"]
+															}
+														write.csv(tab1, paste0(file,"/",files2[m]), row.names=F, quote=F)
+													}
 											}
 									}
 							}
 					}
 			}
 	}
-directories1 = list.files(analysis)
 for (i in 1:length(directories1)) # to generate extraction files that do not include the clades corresponding to human and pangolin sequences (for the strict clock and PoW-transformed trees)
 	{
 		directories2 = list.files(paste0(analysis,"/",directories1[i]))
@@ -430,7 +478,7 @@ for (i in 1:length(directories1)) # to generate extraction files that do not inc
 											{
 												if (m == 0) tab1 = read.csv(gsub("_ext1","_1.csv",localTreesDirectory1), head=T)
 												if (m != 0) tab1 = read.csv(paste0(localTreesDirectory1,"/",files2[m]), head=T)
-												if (directories2[j]=="noHumPanLoc") # to discard human and pangolin tips, as well as the "pangolin" clade for SC2
+												if (directories2[j] == "noHumPanLoc")
 													{
 														nodeClades = matrix(nrow=dim(tab1), ncol=2); colnames(nodeClades) = c("startClade","endClade")
 														nodeClades[which(!tab1[,"node2"]%in%tab1[,"node1"]),"endClade"] = "main"
@@ -500,7 +548,6 @@ for (i in 1:length(directories1)) # to generate extraction files that do not inc
 					}
 			}
 	}
-directories1 = list.files(analysis)
 for (i in 1:length(directories1)) # to generate extraction files that do not include the clades corresponding to human, pangolin, and ghost sequences (for the "timeTrees" trees)
 	{
 		directories2 = list.files(paste0(analysis,"/",directories1[i]))
@@ -640,7 +687,7 @@ for (h in 1:length(directories))
 
 # 4. Investigating the patterns of isolation-by-distance
 
-directories = c("/SC1/noHumPanLoc/transPoW/","/SC2/noHumPanLoc/transPoW/"); rS_list_1 = list()
+directories = c("/SC1/noHumPanLoc/transPoW/","/SC2_late/noHumPanLoc/transPoW/"); rS_list_1 = list()
 for (h in 1:length(directories)) # to compute the correlation between the dispersal duration and geographic distance associated with each branch (not used anymore, and was based on PoW-transformed trees)
 	{
 		folders = list.files(paste0(analysis,directories[h]))
@@ -660,7 +707,8 @@ for (h in 1:length(directories)) # to compute the correlation between the disper
 								x2 = cbind(tab[k,"endLon"], tab[k,"endLat"])
 								dists[k] = rdist.earth(x1, x2, miles=F, R=NULL)
 							}
-						rSs[j] = cor(log(dists),log(tab[,"length"]), method="spearman")
+						rSs[j] = cor(log(dists), log(tab[,"length"]), method="spearman")
+						rSs[j] = cor(dists, tab[,"length"], method="spearman")
 					}
 				rS_list_2[[i]] = rSs
 			}
@@ -669,9 +717,11 @@ for (h in 1:length(directories)) # to compute the correlation between the disper
 		cat("\t",clades[h],": median rS = ",round(median(all_rSs),2),", 95% HPD = [",HPD[1],"-",HPD[2],"]",sep="")
 		rS_list_1[[h]] = rS_list_2
 	}
+		# SC1: median rS = 0.62, 95% HPD = [0.53-0.69]
+		# SC2: median rS = 0.62, 95% HPD = [0.48-0.75] (for "SC2 late")
 
-cutOff = 50; samplingCoordinates = read.csv("SC1_&_2_metadata.csv", head=T)[,c("name","longitude","latitude")]
-directories = c("/SC1/noHumPanLoc/timeTrees/","/SC2/noHumPanLoc/timeTrees/"); rS_list_1 = list(); vS_list_1 = list()
+cutOff = 75; samplingCoordinates = read.csv("SC1_&_2_metadata.csv", head=T)[,c("name","longitude","latitude")]
+directories = c("/SC1/noHumPanLoc/timeTrees/","/SC2_late/noHumPanLoc/timeTrees/"); rS_list_1 = list(); vS_list_1 = list()
 for (h in 1:length(directories)) # to compute the correlation between patristic and geographic distances, as well as the ratio between geographic distances and the tMRCAs
 	{
 		files = list.files(paste0(analysis,directories[h]))
@@ -681,9 +731,9 @@ for (h in 1:length(directories)) # to compute the correlation between patristic 
 			{
 				trees = read.nexus(paste0(analysis,directories[h],files[i]))
 				trees = trees[(length(trees)-99):(length(trees))]
-				tempT = read.nexus(paste0(analysis,gsub("timeTrees","transPoW",directories[h]),files[i]))
+				# tempT = read.nexus(paste0(analysis,gsub("timeTrees","transPoW",directories[h]),files[i]))
 				tips = trees[[1]]$tip.label; rSs = rep(NA, length(trees))
-				for (j in 1:length(tempT))
+				for (j in 1:length(trees))
 					{
 						# index = which(names(trees)==names(tempT)[j]); tree = trees[[index]]
 						vSs = list(); tree = trees[[1]]
@@ -727,7 +777,7 @@ for (h in 1:length(directories)) # to compute the correlation between patristic 
 						distTree = distTree[lower.tri(distTree)]; distsGeo = distsGeo[lower.tri(distsGeo)]; tMRCAs = tMRCAs[lower.tri(tMRCAs)]
 						distsGeo = distsGeo[which(tMRCAs<cutOff)]; distTree = distTree[which(tMRCAs<cutOff)]; tMRCAs = tMRCAs[which(tMRCAs<cutOff)]						
 						rSs[j] = cor(log(distTree[lower.tri(distTree)]),log(distsGeo[lower.tri(distsGeo)]), method="spearman")
-						rSs[j] = cor(distTree[lower.tri(distTree)],distsGeo[lower.tri(distsGeo)], method="spearman")
+						rSs[j] = cor(distTree[lower.tri(distTree)], distsGeo[lower.tri(distsGeo)], method="spearman")
 						vSs[[j]] = distsGeo[lower.tri(distsGeo)]/distTree[lower.tri(distTree)]
 					}
 				rS_list_2[[i]] = rSs; vS_list_2[[i]] = vSs
@@ -742,21 +792,11 @@ for (h in 1:length(directories)) # to compute the correlation between patristic 
 		cat("\t",clades[h],": median vS = ",round(median(all_vSs),2),", 95% HPD = [",HPD_vS[1],"-",HPD_vS[2],"]","\n",sep="")
 		rS_list_1[[h]] = rS_list_2; vS_list_1[[h]] = vS_list_2
 	}
-
-		# SC1, cut-off = 50 years:	median rS = 0.44, 95% HPD = [0.23-0.70]
-		# SC2, cut-off = 50 years:	median rS = 0.55, 95% HPD = [-0.17-0.83]
-		# SC1, cut-off = 75 years: 	median rS = 0.51, 95% HPD = [0.27-0.74]
-		# SC2, cut-off = 75 years: 	median rS = 0.54, 95% HPD = [0.14-0.81]
-		# SC1, no cut-off: 			median rS = 0.45, 95% HPD = [0.36-0.60]
-		# SC2, no cut-off: 			median rS = 0.66, 95% HPD = [0.12-0.80]
-
-		# SC1, cut-off = 50 years:	median vS = 5.60, 95% HPD = [0-26.67]
-		# SC2, cut-off = 50 years:	median vS = 5.24, 95% HPD = [0-22.33]
-		# SC1, cut-off = 75 years: 	median vS = 6.97, 95% HPD = [0-25.40]
-		# SC2, cut-off = 75 years: 	median vS = 4.99, 95% HPD = [0-17.60]
-		# SC1, no cut-off: 			median vS = 4.27, 95% HPD = [0-15.56]
-		# SC2, no cut-off: 			median vS = 3.54, 95% HPD = [0-13.07]
-
+		# SC1, cut-off = 75 years:	median rS = 0.51, 95% HPD = [0.28-0.75]
+		# SC1, cut-off = 50 years:	median rS = 0.45, 95% HPD = [0.24-0.70]
+		# SC2, cut-off = 75 years:	median rS = 0.55, 95% HPD = [0.33-0.79] (for "SC2 late")
+		# SC2, cut-off = 50 years:	median rS = 0.67, 95% HPD = [0.29-0.84] (for "SC2 late")
+	
 # 5. Estimating some dispersal statistics for each reconstruction
 
 directories1 = list.files(analysis); cutoffs = c(75,50)
@@ -767,25 +807,28 @@ for (i in 1:length(directories1))
 			{
 				directories3 = list.files(paste0(analysis,"/",directories1[i],"/",directories2[j]))
 				directories3 = directories3[which(grepl("timeTrees",directories3))]
-				for (k in 1:length(directories3))
+				if (length(directories3) > 0)
 					{
-						files = list.files(paste0(analysis,"/",directories1[i],"/",directories2[j],"/",directories3[k]))
-						if (directories2[j] == "humPangLocSI") files = files[which(grepl("_ext1",files))]
-						if (directories2[j] == "noHumPanLoc") files = files[which(grepl("_ext2",files))]
-						for (l in 1:length(files))
+						for (k in 1:length(directories3))
 							{
-								file = paste0(analysis,"/",directories1[i],"/",directories2[j],"/",directories3[k],"/",files[l])
-								localTreesDirectory1 = file; nberOfExtractionFiles = length(list.files(localTreesDirectory1))
-								for (m in 1:length(cutoffs))
+								files = list.files(paste0(analysis,"/",directories1[i],"/",directories2[j],"/",directories3[k]))
+								if (directories2[j] == "humPangLocSI") files = files[which(grepl("_ext1",files))]
+								if (directories2[j] == "noHumPanLoc") files = files[which(grepl("_ext2",files))]
+								for (l in 1:length(files))
 									{
-										if (directories2[j] == "humPangLocSI") localTreesDirectory2 = gsub("_ext1",paste0("_c",cutoffs[m]),file)
-										if (directories2[j] == "noHumPanLoc") localTreesDirectory2 = gsub("_ext2",paste0("_c",cutoffs[m]),file)
-										dir.create(file.path(localTreesDirectory2), showWarnings=F)
-										for (n in 1:nberOfExtractionFiles)
+										file = paste0(analysis,"/",directories1[i],"/",directories2[j],"/",directories3[k],"/",files[l])
+										localTreesDirectory1 = file; nberOfExtractionFiles = length(list.files(localTreesDirectory1))
+										for (m in 1:length(cutoffs))
 											{
-												tab1 = read.csv(paste0(localTreesDirectory1,"/TreeExtractions_",n,".csv"), head=T)
-												tab2 = tab1[which(tab1[,"startYear"]>(max(tab1[,"endYear"])-cutoffs[m])),]
-												write.csv(tab2, paste0(localTreesDirectory2,"/TreeExtractions_",n,".csv"), row.names=F, quote=F)
+												if (directories2[j] == "humPangLocSI") localTreesDirectory2 = gsub("_ext1",paste0("_c",cutoffs[m]),file)
+												if (directories2[j] == "noHumPanLoc") localTreesDirectory2 = gsub("_ext2",paste0("_c",cutoffs[m]),file)
+												dir.create(file.path(localTreesDirectory2), showWarnings=F)
+												for (n in 1:nberOfExtractionFiles)
+													{
+														tab1 = read.csv(paste0(localTreesDirectory1,"/TreeExtractions_",n,".csv"), head=T)
+														tab2 = tab1[which(tab1[,"startYear"]>(max(tab1[,"endYear"])-cutoffs[m])),]
+														write.csv(tab2, paste0(localTreesDirectory2,"/TreeExtractions_",n,".csv"), row.names=F, quote=F)
+													}
 											}
 									}
 							}
@@ -800,33 +843,37 @@ for (i in 1:length(directories1))
 			{
 				directories3 = list.files(paste0(analysis,"/",directories1[i],"/",directories2[j]))
 				directories3 = directories3[which(grepl("timeTrees",directories3))]
-				for (k in 1:length(directories3))
+				if (length(directories3) > 0)
 					{
-						files = list.files(paste0(analysis,"/",directories1[i],"/",directories2[j],"/",directories3[k]))
-						if (directories2[j] == "humPangLocSI") files = files[which(grepl("_ext1",files))]
-						if (directories2[j] == "noHumPanLoc") files = files[which(grepl("_ext2",files))]
-						for (l in 1:length(files))
+						for (k in 1:length(directories3))
 							{
-								file = paste0(analysis,"/",directories1[i],"/",directories2[j],"/",directories3[k],"/",files[l])
-								localTreesDirectory1 = file; nberOfExtractionFiles = length(list.files(localTreesDirectory1))
-								for (m in 1:length(cutoffs))
+								files = list.files(paste0(analysis,"/",directories1[i],"/",directories2[j],"/",directories3[k]))
+								if (directories2[j] == "humPangLocSI") files = files[which(grepl("_ext1",files))]
+								if (directories2[j] == "noHumPanLoc") files = files[which(grepl("_ext2",files))]
+								for (l in 1:length(files))
 									{
-										if (directories2[j] == "humPangLocSI") localTreesDirectory2 = gsub("_ext1",paste0("_c",cutoffs[m]),file)
-										if (directories2[j] == "humPangLocSI") statisticsDirectory = gsub("_ext1",paste0("_s",cutoffs[m]),file)
-										if (directories2[j] == "noHumPanLoc") localTreesDirectory2 = gsub("_ext2",paste0("_c",cutoffs[m]),file)
-										if (directories2[j] == "noHumPanLoc") statisticsDirectory = gsub("_ext2",paste0("_s",cutoffs[m]),file)
-										dir.create(file.path(statisticsDirectory), showWarnings=F)
-										timeSlices = 100; onlyTipBranches = FALSE; showingPlots = FALSE; nberOfCores = 10; slidingWindow = 1
-										if (directories2[j] == "humPangLocSI") outputName = gsub("_ext1","",unlist(strsplit(file,"\\/"))[length(unlist(strsplit(file,"\\/")))])
-										if (directories2[j] == "noHumPanLoc") outputName = gsub("_ext2","",unlist(strsplit(file,"\\/"))[length(unlist(strsplit(file,"\\/")))])
-										outputName = paste0(statisticsDirectory,"/",outputName)
-										spreadStatistics_mod(localTreesDirectory2, nberOfExtractionFiles, timeSlices, onlyTipBranches, showingPlots, outputName, nberOfCores, slidingWindow)
+										file = paste0(analysis,"/",directories1[i],"/",directories2[j],"/",directories3[k],"/",files[l])
+										localTreesDirectory1 = file; nberOfExtractionFiles = length(list.files(localTreesDirectory1))
+										for (m in 1:length(cutoffs))
+											{
+												if (directories2[j] == "humPangLocSI") localTreesDirectory2 = gsub("_ext1",paste0("_c",cutoffs[m]),file)
+												if (directories2[j] == "humPangLocSI") statisticsDirectory = gsub("_ext1",paste0("_s",cutoffs[m]),file)
+												if (directories2[j] == "noHumPanLoc") localTreesDirectory2 = gsub("_ext2",paste0("_c",cutoffs[m]),file)
+												if (directories2[j] == "noHumPanLoc") statisticsDirectory = gsub("_ext2",paste0("_s",cutoffs[m]),file)
+												dir.create(file.path(statisticsDirectory), showWarnings=F)
+												timeSlices = 100; onlyTipBranches = FALSE; showingPlots = FALSE; nberOfCores = 10; slidingWindow = 1
+												if (directories2[j] == "humPangLocSI") outputName = gsub("_ext1","",unlist(strsplit(file,"\\/"))[length(unlist(strsplit(file,"\\/")))])
+												if (directories2[j] == "noHumPanLoc") outputName = gsub("_ext2","",unlist(strsplit(file,"\\/"))[length(unlist(strsplit(file,"\\/")))])
+												outputName = paste0(statisticsDirectory,"/",outputName)
+												spreadStatistics_mod(localTreesDirectory2, nberOfExtractionFiles, timeSlices, onlyTipBranches, showingPlots, outputName, nberOfCores, slidingWindow)
+											}
 									}
 							}
 					}
 			}
 	}
-cutoffs = c(75,50); minX = 9999; maxX = -9999; minY = 9999; maxY = -9999
+cutoffs = c(75,50); minX = 9999; maxX = -9999; minY = 9999; maxY = -9999; writingFiles = TRUE
+directories1 = list.files(analysis); directories1 = directories1[which(!directories1%in%c("SC1","SC2_early","SC2_late"))]
 for (i in 1:length(directories1)) # to estimate the maximum, mean, and median branch velocities (not considering human/pangolin branches/clades)
 	{
 		for (m in 1:length(cutoffs))
@@ -839,50 +886,53 @@ for (i in 1:length(directories1)) # to estimate the maximum, mean, and median br
 					{
 						directories3 = list.files(paste0(analysis,"/",directories1[i],"/",directories2[j]))
 						directories3 = directories3[which(grepl("timeTrees",directories3))]
-						for (k in 1:length(directories3))
+						if (length(directories3) > 0)
 							{
-								files = list.files(paste0(analysis,"/",directories1[i],"/",directories2[j],"/",directories3[k]))
-								files = files[which(grepl("_ext2",files))]
-								for (l in 1:length(files))
+								for (k in 1:length(directories3))
 									{
-										file = paste0(analysis,"/",directories1[i],"/",directories2[j],"/",directories3[k],"/",files[l])
-										localTreesDirectory = gsub("_ext2",paste0("_c",cutoffs[m]),file)
-										nberOfExtractionFiles = length(list.files(localTreesDirectory))
-										line_allVs = c()
-										line_maxVs = matrix(nrow=1, ncol=nberOfExtractionFiles)
-										line_meanVs = matrix(nrow=1, ncol=nberOfExtractionFiles)
-										line_medianVs = matrix(nrow=1, ncol=nberOfExtractionFiles)
-										for (n in 1:nberOfExtractionFiles)
+										files = list.files(paste0(analysis,"/",directories1[i],"/",directories2[j],"/",directories3[k]))
+										files = files[which(grepl("_ext2",files))]
+										for (l in 1:length(files))
 											{
-												tab = read.csv(paste0(localTreesDirectory,"/TreeExtractions_",n,".csv"), head=T)
-												x1 = cbind(tab[,"startLon"], tab[,"startLat"])
-												x2 = cbind(tab[,"endLon"], tab[,"endLat"])
-												if (minX > x1[1,1]) minX = x1[1,1]
-												if (maxX < x1[1,1]) maxX = x1[1,1]
-												if (minY > x1[1,2]) minY = x1[1,2]
-												if (maxY < x1[1,2]) maxY = x1[1,2]
-												if (minX > x2[1,1]) minX = x2[1,1]
-												if (maxX < x2[1,1]) maxX = x2[1,1]
-												if (minY > x2[1,2]) minY = x2[1,2]
-												if (maxY < x2[1,2]) maxY = x2[1,2]
-												geoDists = rdist.earth(x1, x2, miles=F, R=NULL)
-												if (length(diag(geoDists)) != length(tab[,"length"])) print(c(i,m,j,k,l))
-												branchVelocities = diag(geoDists)/tab[,"length"]
-												allVs = c(allVs, branchVelocities)
-												line_allVs = c(line_allVs, branchVelocities)
-												line_maxVs[1,n] = max(branchVelocities)
-												line_meanVs[1,n] = mean(branchVelocities)
-												line_medianVs[1,n] = median(branchVelocities)
+												file = paste0(analysis,"/",directories1[i],"/",directories2[j],"/",directories3[k],"/",files[l])
+												localTreesDirectory = gsub("_ext2",paste0("_c",cutoffs[m]),file)
+												nberOfExtractionFiles = length(list.files(localTreesDirectory))
+												line_allVs = c()
+												line_maxVs = matrix(nrow=1, ncol=nberOfExtractionFiles)
+												line_meanVs = matrix(nrow=1, ncol=nberOfExtractionFiles)
+												line_medianVs = matrix(nrow=1, ncol=nberOfExtractionFiles)
+												for (n in 1:nberOfExtractionFiles)
+													{
+														tab = read.csv(paste0(localTreesDirectory,"/TreeExtractions_",n,".csv"), head=T)
+														x1 = cbind(tab[,"startLon"], tab[,"startLat"])
+														x2 = cbind(tab[,"endLon"], tab[,"endLat"])
+														if (minX > x1[1,1]) minX = x1[1,1]
+														if (maxX < x1[1,1]) maxX = x1[1,1]
+														if (minY > x1[1,2]) minY = x1[1,2]
+														if (maxY < x1[1,2]) maxY = x1[1,2]
+														if (minX > x2[1,1]) minX = x2[1,1]
+														if (maxX < x2[1,1]) maxX = x2[1,1]
+														if (minY > x2[1,2]) minY = x2[1,2]
+														if (maxY < x2[1,2]) maxY = x2[1,2]
+														geoDists = rdist.earth(x1, x2, miles=F, R=NULL)
+														if (length(diag(geoDists)) != length(tab[,"length"])) print(c(i,m,j,k,l))
+														branchVelocities = diag(geoDists)/tab[,"length"]
+														allVs = c(allVs, branchVelocities)
+														line_allVs = c(line_allVs, branchVelocities)
+														line_maxVs[1,n] = max(branchVelocities)
+														line_meanVs[1,n] = mean(branchVelocities)
+														line_medianVs[1,n] = median(branchVelocities)
+													}
+												line_allVs = as.matrix(t(line_allVs))
+												row.names(line_allVs) = unlist(strsplit(file,"\\/"))[length(unlist(strsplit(file,"\\/")))]
+												row.names(line_maxVs) = unlist(strsplit(file,"\\/"))[length(unlist(strsplit(file,"\\/")))]
+												row.names(line_meanVs) = unlist(strsplit(file,"\\/"))[length(unlist(strsplit(file,"\\/")))]
+												row.names(line_medianVs) = unlist(strsplit(file,"\\/"))[length(unlist(strsplit(file,"\\/")))]
+												allBranchVelocities[[l]] = line_allVs
+												maxBranchVelocities = rbind(maxBranchVelocities, line_maxVs)
+												meanBranchVelocities = rbind(meanBranchVelocities, line_meanVs)
+												medianBranchVelocities = rbind(medianBranchVelocities, line_medianVs)
 											}
-										line_allVs = as.matrix(t(line_allVs))
-										row.names(line_allVs) = unlist(strsplit(file,"\\/"))[length(unlist(strsplit(file,"\\/")))]
-										row.names(line_maxVs) = unlist(strsplit(file,"\\/"))[length(unlist(strsplit(file,"\\/")))]
-										row.names(line_meanVs) = unlist(strsplit(file,"\\/"))[length(unlist(strsplit(file,"\\/")))]
-										row.names(line_medianVs) = unlist(strsplit(file,"\\/"))[length(unlist(strsplit(file,"\\/")))]
-										allBranchVelocities[[l]] = line_allVs
-										maxBranchVelocities = rbind(maxBranchVelocities, line_maxVs)
-										meanBranchVelocities = rbind(meanBranchVelocities, line_meanVs)
-										medianBranchVelocities = rbind(medianBranchVelocities, line_medianVs)
 									}
 							}
 					}
@@ -911,10 +961,10 @@ for (i in 1:length(directories1)) # to estimate the maximum, mean, and median br
 
 logTransformation1 = FALSE; logTransformation2 = TRUE
 directory2 = "humPangLocSI"; directory2 = "noHumPanLoc"
-for (i in 1:length(clades))
+for (i in 1:2) # length(clades))
 	{
 		if (i == 1) { hosts = c(); mccs = c() }
-		mcc = read.csv(paste0(analysis,"/",clades[i],"/",directory2,"/transPoW/",clades[i],"_",selected_NRRs[i],"_1.csv"), head=T)
+		mcc = read.csv(paste0(analysis,"/",clades[i],"/",directory2,"/transPoW/",gsub("_late","",clades[i]),"_",selected_NRRs[i],"_1.csv"), head=T)
 		hosts = c(hosts, unique(mcc[,"host"])); mccs = rbind(mccs, mcc)
 	}
 hosts = unique(hosts); hosts = hosts[order(hosts)]; hosts = hosts[!is.na(hosts)]; counts = rep(NA, length(hosts))
@@ -922,8 +972,8 @@ for (i in 1:length(hosts)) counts[i] = sum(mccs[,"host"]==hosts[i], na.rm=T)
 hosts = hosts[order(counts, hosts, decreasing=T)]
 for (i in 1:length(clades))
 	{
-		tree = readAnnotatedNexus(paste0(analysis,"/",clades[i],"/",directory2,"/transPoW/",clades[i],"_",selected_NRRs[i],".tree"))
-		mcc = read.csv(paste0(analysis,"/",clades[i],"/",directory2,"/transPoW/",clades[i],"_",selected_NRRs[i],"_1.csv"), head=T)
+		tree = readAnnotatedNexus(paste0(analysis,"/",clades[i],"/",directory2,"/transPoW/",gsub("_late","",clades[i]),"_",selected_NRRs[i],".tree"))
+		mcc = read.csv(paste0(analysis,"/",clades[i],"/",directory2,"/transPoW/",gsub("_late","",clades[i]),"_",selected_NRRs[i],"_1.csv"), head=T)
 		mostRecentSamplingDatum = mostRecentSamplingDates[i]; correctedBranches = c()
 		for (j in 1:length(tree$edge.length))
 			{
@@ -999,8 +1049,8 @@ for (i in 1:length(clades))
 		tree = buffer; rootHeight = max(nodeHeights(tree))
 		root_time = mostRecentSamplingDatum-rootHeight; tree$tip.label = gsub("'","",tree$tip.label)
 		minYear = mostRecentSamplingDatum-tree$root.annotation$`height_95%_HPD`[[2]]; maxYear = mostRecentSamplingDatum
-		if (clades[i] == "SC1") pdf(paste0(clades[i],"_",selected_NRRs[i],"_panel1.pdf"), width=4.0, height=4.0)
-		if (clades[i] == "SC2") pdf(paste0(clades[i],"_",selected_NRRs[i],"_panel1.pdf"), width=4.0, height=2.0)
+		if (gsub("_late","",clades[i]) == "SC1") pdf(clades[i],"_",selected_NRRs[i],"_panel1.pdf"), width=4.0, height=4.0)
+		if (gsub("_late","",clades[i]) == "SC2") pdf(clades[i],"_",selected_NRRs[i],"_panel1.pdf"), width=4.0, height=2.0)
 		par(mar=c(0.7,0,0,0), oma=c(0,0,0,0), mgp=c(0,0.1,0), lwd=0.2, bty="o", col="gray30"); plottingRootNode = FALSE
 		plot(tree, show.tip.label=F, show.node.label=F, edge.width=0.5, cex=0.6, align.tip.label=3, 
 			 x.lim=c(minYear-(maxYear-max(nodeHeights(tree))), max(nodeHeights(tree))), col="gray30", edge.color="gray30")
@@ -1094,7 +1144,7 @@ for (i in 1:length(clades))
 		dev.off()
 	}
 cutoffs = c(75,50)
-for (i in 1:length(clades)) # to plot the WLDV estimates based on the untransformed time-scaled trees
+for (i in 1:2) # length(clades)) # to plot the WLDV estimates based on the untransformed time-scaled trees
 	{
 		wldv_list1 = list()
 		minX = 9999; maxX = -9999; minY = 9999; maxY = -9999
@@ -1142,7 +1192,7 @@ for (i in 1:length(clades)) # to plot the WLDV estimates based on the untransfor
 		dev.off()
 	}
 cutoffs = c(75,50)
-for (i in 1:length(clades)) # to report the WDC estimates based on the untransformed time-scaled trees
+for (i in 1:2) # length(clades)) # to report the WDC estimates based on the untransformed time-scaled trees
 	{
 		wdcs_list1 = list()
 		minX = 9999; maxX = -9999; minY = 9999; maxY = -9999
@@ -1150,7 +1200,7 @@ for (i in 1:length(clades)) # to report the WDC estimates based on the untransfo
 			{
 				wdcs_list2 = list(); wdcs_values = c()
 				directories = list.files(paste0(analysis,"/",clades[i],"/",directory2,"/timeTrees/"))
-				directories = directories[which((grepl(clades[i],directories))&(grepl(paste0("_s",cutoffs[j]),directories)))]
+				directories = directories[which((grepl(gsub("_late","",clades[i]),directories))&(grepl(paste0("_s",cutoffs[j]),directories)))]
 				for (k in 1:length(directories))
 					{
 						files = list.files(paste0(analysis,"/",clades[i],"/",directory2,"/timeTrees/",directories[k],"/"))
@@ -1164,16 +1214,17 @@ for (i in 1:length(clades)) # to report the WDC estimates based on the untransfo
 						if (maxY < max(wdcs_density$y)) maxY = max(wdcs_density$y)
 						wdcs_values = c(wdcs_values, wdcs_list2[[k]])
 					}
-				wdcs_list1[[j]] = wdcs_list2; HPD = round(HDInterval::hdi(wdcs_values)[1:2],1)
-				cat("\tWDC (",clades[i],", >",cutoffs[j]," years) = ",round(median(wdcs_values),1),", 95% HPD = [",HPD[1],"-",HPD[2],"]\n",sep="")
+				wdcs_list1[[j]] = wdcs_list2; HPD = round(HDInterval::hdi(wdcs_values)[1:2],0)
+				cat("\tWDC (",clades[i],", >",cutoffs[j]," years) = ",round(median(wdcs_values),0),", 95% HPD = [",HPD[1],"-",HPD[2],"]\n",sep="")
 			}
 	}
+		# SC1, cut-off = 75 years: 	median WDC = 1661, 95% HPD = [888-2998]
 		# SC1, cut-off = 50 years: 	median WDC = 1666, 95% HPD = [811-3399]
-		# SC1, cut-off = 75 years: 	median WDC = 1662, 95% HPD = [888-2998]
-		# SC2, cut-off = 50 years: 	median WDC = 1034, 95% HPD = [7-3726]
-		# SC2, cut-off = 75 years: 	median WDC = 1144, 95% HPD = [74-3831]
+		# SC2, cut-off = 75 years: 	median WDC = 843, 95% HPD = [170-2243] (for "SC2 late")
+		# SC2, cut-off = 50 years: 	median WDC = 740, 95% HPD = [116-2587] (for "SC2 late")
+
 cutoffs = c(75,50)
-for (i in 1:length(clades)) # to plot the WDC estimates based on the untransformed time-scaled trees
+for (i in 1:2) # length(clades)) # to plot the WDC estimates based on the untransformed time-scaled trees
 	{
 		wdcs_list1 = list(); all_values = list()
 		minX = 9999; maxX = -9999; minY = 9999; maxY = -9999
@@ -1181,7 +1232,7 @@ for (i in 1:length(clades)) # to plot the WDC estimates based on the untransform
 			{
 				wdcs_list2 = list(); wdcs_values = c()
 				directories = list.files(paste0(analysis,"/",clades[i],"/",directory2,"/timeTrees/"))
-				directories = directories[which((grepl(clades[i],directories))&(grepl(paste0("_s",cutoffs[j]),directories)))]
+				directories = directories[which((grepl(gsub("_late","",clades[i]),directories))&(grepl(paste0("_s",cutoffs[j]),directories)))]
 				for (k in 1:length(directories))
 					{
 						files = list.files(paste0(analysis,"/",clades[i],"/",directory2,"/timeTrees/",directories[k],"/"))
@@ -1195,8 +1246,8 @@ for (i in 1:length(clades)) # to plot the WDC estimates based on the untransform
 						if (maxY < max(wdcs_density$y)) maxY = max(wdcs_density$y)
 						wdcs_values = c(wdcs_values, wdcs_list2[[k]])
 					}
-				wdcs_list1[[j]] = wdcs_list2; all_values[[j]] = wdcs_values; HPD = round(HDInterval::hdi(wdcs_values)[1:2],1)
-				cat("\tWDC (",clades[i],", <=",cutoffs[j]," years) = ",round(median(wdcs_values),1),", 95% HPD = [",HPD[1],"-",HPD[2],"]\n",sep="")
+				wdcs_list1[[j]] = wdcs_list2; all_values[[j]] = wdcs_values; HPD = round(HDInterval::hdi(wdcs_values)[1:2],0)
+				cat("\tWDC (",clades[i],", <=",cutoffs[j]," years) = ",round(median(wdcs_values),0),", 95% HPD = [",HPD[1],"-",HPD[2],"]\n",sep="")
 			}
 		pdf(paste0(clades[i],"_",selected_NRRs[i],"_panel2_b1.pdf"), width=3.5, height=2.2)
 		par(mgp=c(0,0,0), oma=c(0,0,0,0), mar=c(2.1,2.3,0.5,0.5), lwd=0.3, col="gray30")
@@ -1227,7 +1278,7 @@ for (i in 1:length(clades)) # to plot the WDC estimates based on the untransform
 				if (cutoffs[j] == 50) LTY = 2
 				if (j == 1)
 						{
-							plot(density(all_values[[j]]), xlim=c(0,10000), ylim=c(minY,0.0008), col=NA, axes=F, ann=F, frame=F)
+							plot(density(all_values[[j]]), xlim=c(0,10000), ylim=c(minY,0.0011), col=NA, axes=F, ann=F, frame=F)
 						}
 				if (cutoffs[j] == 75) polygon(density(all_values[[j]]), lwd=0.01, border=NA, col=rgb(77,77,77,30,maxColorValue=255))
 				if (cutoffs[j] == 50) lines(density(all_values[[j]]), lwd=0.20, lty=LTY, col="gray30")
@@ -1335,37 +1386,37 @@ directory2 = "humPangLocSI"; directory2 = "noHumPanLoc"
 checkingSamplingCoordinates = FALSE
 if (checkingSamplingCoordinates)
 	{
-		for (i in 1:length(clades))
+		for (i in 1:2) # length(clades))
 			{
 				files = list.files(paste0(analysis,"/",clades[i],"/",directory2,"/strictClock/"))
 				files = files[which(grepl("_ext1",files))]
 				NRRs = gsub("SC1_NRR","",gsub("SC2_NRR","",gsub("_b_ext1","",files)))
 				for (j in 1:length(NRRs))
 					{
-						pdf(paste0("TEMP_",clades[i],"_NRR",NRRs[j],".pdf"))
+						pdf(paste0("TEMP_",gsub("_late","",clades[i]),"_NRR",NRRs[j],".pdf"))
 						plot(background, col=cols1, axes=F, ann=F, box=F, legend=F)
 						for (k in 1:100)
 							{
-								tab = read.csv(paste0(analysis,"/",clades[i],"/",directory2,"/strictClock/",clades[i],"_NRR",NRRs[j],"_b_ext1/TreeExtractions_",k,".csv"), head=T)
+								tab = read.csv(paste0(analysis,"/",clades[i],"/",directory2,"/strictClock/",gsub("_late","",clades[i]),"_NRR",NRRs[j],"_b_ext1/TreeExtractions_",k,".csv"), head=T)
 								points(tab[which(!tab[,"node2"]%in%tab[,"node1"]),c("endLon","endLat")], cex=0.2, col="gray30")
 							}
 						dev.off()
 					}
 			}
 	}
-for (i in 1:length(clades))
+for (i in 1:2) # length(clades))
 	{
 		if (i == 1) { hosts = c(); mccs = c() }
-		mcc = read.csv(paste0(analysis,"/",clades[i],"/",directory2,"/transPoW/",clades[i],"_",selected_NRRs[i],"_1.csv"), head=T)
+		mcc = read.csv(paste0(analysis,"/",clades[i],"/",directory2,"/transPoW/",gsub("_late","",clades[i]),"_",selected_NRRs[i],"_1.csv"), head=T)
 		hosts = c(hosts, unique(mcc[,"host"])); mccs = rbind(mccs, mcc)
 	}
 hosts = unique(hosts); hosts = hosts[order(hosts)]; hosts = hosts[!is.na(hosts)]; counts = rep(NA, length(hosts))
 for (i in 1:length(hosts)) counts[i] = sum(mccs[,"host"]==hosts[i], na.rm=T)
 hosts = hosts[order(counts, hosts, decreasing=T)]
 croppingPolygons = FALSE; cutoffs = c(99999); polygons = list()
-for (i in 1:length(clades))
+for (i in 1:2) # length(clades))
 	{
-		tree = readAnnotatedNexus(paste0(analysis,"/",clades[i],"/noHumPanLoc/transPoW/",clades[i],"_",selected_NRRs[i],".tree")) # to get a fixed time-scale
+		tree = readAnnotatedNexus(paste0(analysis,"/",clades[i],"/noHumPanLoc/transPoW/",gsub("_late","",clades[i]),"_",selected_NRRs[i],".tree")) # to get a fixed time-scale
 		mostRecentSamplingDatum = mostRecentSamplingDates[i]; correctedBranches = c()
 		for (j in 1:length(tree$edge.length))
 			{
@@ -1420,7 +1471,7 @@ for (i in 1:length(clades))
 		tree = buffer; rootHeight = max(nodeHeights(tree))
 		root_time = mostRecentSamplingDatum-rootHeight; tree$tip.label = gsub("'","",tree$tip.label)
 		minYear = mostRecentSamplingDatum-tree$root.annotation$`height_95%_HPD`[[2]]; maxYear = mostRecentSamplingDatum
-		mcc = read.csv(paste0(analysis,"/",clades[i],"/",directory2,"/transPoW/",clades[i],"_",selected_NRRs[i],"_2.csv"), head=T)		
+		mcc = read.csv(paste0(analysis,"/",clades[i],"/",directory2,"/transPoW/",gsub("_late","",clades[i]),"_",selected_NRRs[i],"_2.csv"), head=T)		
 		endYears_colours = rep(NA, dim(mcc)[1])
 		for (j in 1:length(endYears_colours))
 			{
@@ -1432,7 +1483,7 @@ for (i in 1:length(clades))
 				endYear_index = (((endYearMod-minYear)/(maxYear-minYear))*100)+1
 				endYears_colours[j] = cols2[endYear_index]
 			}
-		localTreesDirectory = paste0(analysis,"/",clades[i],"/",directory2,"/transPoW/",clades[i],"_",selected_NRRs[i],"_ext2")
+		localTreesDirectory = paste0(analysis,"/",clades[i],"/",directory2,"/transPoW/",gsub("_late","",clades[i]),"_",selected_NRRs[i],"_ext2")
 		nberOfExtractionFiles = length(list.files(localTreesDirectory)); prob = 0.80; precision = 50; startDatum = maxYear-1000
 		polygons[[i]] = suppressWarnings(spreadGraphic2(localTreesDirectory, nberOfExtractionFiles, prob, startDatum, precision))
 		polygons_colours = rep(NA, length(polygons[[i]]))
@@ -1467,7 +1518,7 @@ for (i in 1:length(clades))
 									{
 										for (l in 1:length(polygons[[i]][[k]]@polygons))
 											{
-												polygons[[i]][[k]]@polygons[[l]] = checkPolygonsHoles(polygons[[i]][[k]]@polygons[[l]])
+												# polygons[[i]][[k]]@polygons[[l]] = maptools::checkPolygonsHoles(polygons[[i]][[k]]@polygons[[l]])
 											}
 										pol = polygons[[i]][[k]]; crs(pol) = crs(background)
 										if (croppingPolygons == TRUE) pol = crop(pol, provinces)
@@ -1721,15 +1772,18 @@ if (usePreviousScript)
 
 	# 8.2. Figures based on recCA positions shared by Philippe
 
-directory2 = "withTwoGhosts"; directory2 = "noHumPanLoc"
+# directory2 = "withTwoGhosts"; directory2 = "noHumPanLoc"
+directories = c("SC1_prior_stdevDiv5_Comb1-10","SC2_rateLate2020_relRate_rootConst")
+directories = c("SC1_prior_stdevDiv5_2ghosts_combined_1-4","SC2_rateLate2020_relrate_rootConst_2ghosts")
 probabilities = c(0.95,0.75,0.50); red_cols = list()
 red_cols[[1]] = rgb(204,0,0,60,maxColorValue=255)
 red_cols[[2]] = rgb(204,0,0,100,maxColorValue=255)
 red_cols[[3]] = rgb(204,0,0,140,maxColorValue=255)
-croppingPolygons = FALSE
+croppingPolygons = FALSE; clades = c("SC1","SC2")
 for (i in 1:length(clades))
 	{
-		positions = read.table(paste0(analysis,"/",clades[i],"/",directory2,"/timeTrees/parentLocations.txt"), head=T)[,1:2]
+		# positions = read.table(paste0(analysis,"/",clades[i],"/",directory2,"/timeTrees/parentLocations.txt"), head=T)[,1:2]
+		positions = read.table(paste0(analysis,"/",directories[i],"/noHumPanLoc/timeTrees/parentLocations.txt"), head=T)[,1:2]
 		H = Hpi(cbind(positions[,"longitude"],positions[,"latitude"]), pilot="samse"); polygons = list()
 		kde = kde(cbind(positions[,"longitude"],positions[,"latitude"]), H=H, compute.cont=T, gridsize=c(1000,1000))
 		for (j in 1:length(probabilities))
@@ -1740,7 +1794,7 @@ for (i in 1:length(clades))
 				ps = Polygons(pols,1); contourPolygons = SpatialPolygons(list(ps)); # plot(contourPolygons, add=T)
 				polygons[[j]] = SpatialPolygonsDataFrame(contourPolygons, data.frame(ID=1:length(contourPolygons)))
 			}
-		pdf(paste0(clades[i],"_panel5.pdf"), width=7, height=4.8)
+		pdf(paste0(directories[i],"_panel5.pdf"), width=7, height=4.8)
 		par(oma=c(0,0,0,0), mar=c(0.0,2.5,0.0,0.0), lwd=0.2, col="gray30")
 		plot(background, col=cols1, axes=F, ann=F, box=F, legend=F)
 		lines(borders, col="white", lwd=0.3)
@@ -1748,20 +1802,21 @@ for (i in 1:length(clades))
 			{
 				for (k in 1:length(polygons[[j]]@polygons))
 					{
-						polygons[[j]]@polygons[[k]] = checkPolygonsHoles(polygons[[j]]@polygons[[k]])
+						# polygons[[j]]@polygons[[k]] = checkPolygonsHoles(polygons[[j]]@polygons[[k]])
 					}
 				pol = polygons[[j]]; crs(pol) = crs(background)
 				if (croppingPolygons == TRUE) pol = crop(pol, provinces)
 				plot(pol, axes=F, col=red_cols[[j]], add=T, border=NA)
 			}
-		if (directory2 == "withTwoGhosts")
+		# if (directory2 == "withTwoGhosts")
+		if (grepl("ghosts",directories[i]))
 			{
-				if (clades[i] == "SC1")
+				if (grepl("SC1",clades[i]))
 					{
 						points(cbind(107.1333328,23.5999976), pch=3, col="gray30", cex=0.7, lwd=0.5) # ghost position 1
 						points(cbind(107.5666644,23.333332), pch=3, col="gray30", cex=0.7, lwd=0.5) # ghost position 2
 					}
-				if (clades[i] == "SC2")
+				if (grepl("SC2",clades[i]))
 					{
 						points(cbind(106.629997,26.646999), pch=3, col="gray30", cex=0.7, lwd=0.5) # ghost position 1
 						points(cbind(110.478996,29.117001), pch=3, col="gray30", cex=0.7, lwd=0.5) # ghost position 2
@@ -1776,13 +1831,13 @@ for (i in 1:length(clades))
 
 	# 8.3. Analysing the distances between recCA and some provinces
 
-directory2 = "withTwoGhosts"; directory2 = "noHumPanLoc"
+directory2 = "withTwoGhosts"; directory2 = "noHumPanLoc"; clades = c("SC1","SC2_late")
 hubei = subset(provinces, NAME=="Hubei")@polygons[[1]]@Polygons[[1]]@coords
 guangdong = subset(provinces, NAME=="Guangdong")@polygons[[1]]@Polygons[[1]]@coords
 for (i in 1:length(clades))
 	{
-		if (clades[i] == "SC1") { province = guangdong; provinceName = "Guangdong" }
-		if (clades[i] == "SC2") { province = hubei; provinceName = "Hubei" }
+		if (gsub("_late","",clades[i]) == "SC1") { province = guangdong; provinceName = "Guangdong" }
+		if (gsub("_late","",clades[i]) == "SC2") { province = hubei; provinceName = "Hubei" }
 		positions = read.table(paste0(analysis,"/",clades[i],"/",directory2,"/timeTrees/parentLocations.txt"), head=T)[,1:2]
 		minDistances = matrix(nrow=dim(positions)[1], ncol=1)
 		for (j in 1:dim(positions)[1])
@@ -1796,26 +1851,26 @@ for (i in 1:length(clades))
 				write.table(minDistances, paste0(clades[i],"_minDistance_recCA_",provinceName), row.names=F, col.names=F, quote=F)
 			}
 		medianV = round(median(minDistances),2); HPD = round(HDInterval::hdi(minDistances)[1:2],2)
-		cat("\t",clades[i],": median of the min. distances between recCA positions and the ",provinceName," = ",medianV," km, 95% HPD = [",HPD[1],"-",HPD[2],"]\n",sep="")
+		cat("\t",clades[i],": median of the minimum distances between recCA positions and the ",provinceName," = ",medianV," km, 95% HPD = [",HPD[1],"-",HPD[2],"]\n",sep="")
 	}
-		# SC1: median of the min. distances between recCA positions and the Guangdong = 803.45 km, 95% HPD = [442.81-1248.48]
-		# SC2: median of the min. distances between recCA positions and the Hubei = 1248.38 km, 95% HPD = [851.48-1675.56]
+		# SC1: median of the minimum distances between recCA positions and the Guangdong = 803.45 km, 95% HPD = [442.81-1248.48]
+		# SC2: median of the minimum distances between recCA positions and the Hubei = 1169.17 km, 95% HPD = [778.56-1669.35]
 
 # 9. Visualising all continuous phylogeographic reconstructions
 
 logTransformation1 = FALSE; logTransformation2 = TRUE
 directory2 = "humPangLocSI"; directory2 = "noHumPanLoc"
-for (i in 1:length(clades))
+for (i in 1:2) # length(clades))
 	{
 		if (i == 1) { hosts = c(); mccs = c() }
-		mcc = read.csv(paste0(analysis,"/",clades[i],"/",directory2,"/transPoW/",clades[i],"_",selected_NRRs[i],"_1.csv"), head=T)
+		mcc = read.csv(paste0(analysis,"/",clades[i],"/",directory2,"/transPoW/",gsub("_late","",clades[i]),"_",selected_NRRs[i],"_1.csv"), head=T)
 		hosts = c(hosts, unique(mcc[,"host"])); mccs = rbind(mccs, mcc)
 	}
 hosts = unique(hosts); hosts = hosts[order(hosts)]; hosts = hosts[!is.na(hosts)]; counts = rep(NA, length(hosts))
 for (i in 1:length(hosts)) counts[i] = sum(mccs[,"host"]==hosts[i], na.rm=T)
 hosts = hosts[order(counts, hosts, decreasing=T)]
 croppingPolygons = FALSE; polygons_list2 = list()
-for (i in 1:length(clades))
+for (i in 1:2) # length(clades))
 	{
 		polygons_list1 = list(); mostRecentSamplingDatum = mostRecentSamplingDates[i]
 		files = list.files(paste0(analysis,"/",clades[i],"/",directory2,"/transPoW"))
@@ -1831,18 +1886,20 @@ for (i in 1:length(clades))
 			}
 		polygons_list2[[i]] = polygons_list1
 	}
-saveRDS(polygons_list2, "Analyses_20231208.rds"); polygons_list = polygons_list2
-polygons_list = readRDS("Analyses_20231208.rds"); croppingPolygons = FALSE; reportingHosts = FALSE
-for (g in 1:2) { for (h in 1:length(clades)) {		
+saveRDS(polygons_list2, "Analyses_20241009.rds"); polygons_list = polygons_list2
+polygons_list = readRDS("Analyses_20241009.rds"); croppingPolygons = FALSE; reportingHosts = FALSE
+for (g in 1:3) { for (h in 1:2) {		
 		pdf(paste0(clades[h],"_all_NRRs_fig",g,".pdf"), width=8.0, height=9.0) # dev.new(width=8.0, height=9.0)
-		par(mfrow=c(5,3), oma=c(0.0,0.7,0.0,0.0), mar=c(0.0,0.0,0.0,0.0), lwd=0.2, col="gray30")
+		par(mfrow=c(5,3), oma=c(0.0,0.7,0.0,0.0), mar=c(0.0,0.0,0.0,0.0), lwd=0.2, col="gray30"); iS = c()
 		if ((h==1)&(g==1)) { iS = c(1:13,15:16) }
 		if ((h==1)&(g==2)) { iS = 17:31 }
-		if ((h==2)&(g==1)) { iS = c(1:2,4:16) }
-		if ((h==2)&(g==2)) { iS = 17:27 }
+		if ((h==2)&(g==1)) { iS = 1:15 }
+		if ((h==2)&(g==2)) { iS = 16:30 }
+		if ((h==2)&(g==3)) { iS = c(31:36,38:44) }
+		if (length(iS) > 0)	{
 		for (i in iS) # for SC2 (part 2)
 			{
-				tree = readAnnotatedNexus(paste0(analysis,"/",clades[h],"/",directory2,"/transPoW/",clades[h],"_NRR",i,".tree"))
+				tree = readAnnotatedNexus(paste0(analysis,"/",clades[h],"/",directory2,"/transPoW/",gsub("_late","",clades[h]),"_NRR",i,".tree"))
 				mostRecentSamplingDatum = mostRecentSamplingDates[h]; correctedBranches = c()
 				startDatum = mostRecentSamplingDatum-tree$root.annotation$`height_95%_HPD`[[2]]
 				for (j in 1:length(tree$edge.length))
@@ -1898,7 +1955,7 @@ for (g in 1:2) { for (h in 1:length(clades)) {
 				tree = buffer; rootHeight = max(nodeHeights(tree))
 				root_time = mostRecentSamplingDatum-rootHeight; tree$tip.label = gsub("'","",tree$tip.label)
 				minYear = mostRecentSamplingDatum-tree$root.annotation$`height_95%_HPD`[[2]]; maxYear = mostRecentSamplingDatum
-				mcc = read.csv(paste0(analysis,"/",clades[h],"/",directory2,"/transPoW/",clades[h],"_NRR",i,"_2.csv"), head=T)
+				mcc = read.csv(paste0(analysis,"/",clades[h],"/",directory2,"/transPoW/",gsub("_late","",clades[h]),"_NRR",i,"_2.csv"), head=T)
 				endYears_colours = rep(NA, dim(mcc)[1])
 				for (j in 1:length(endYears_colours))
 					{
@@ -1924,12 +1981,12 @@ for (g in 1:2) { for (h in 1:length(clades)) {
 					}
 				plot(background, col=cols1, axes=F, ann=F, box=F, legend=F)
 				lines(borders, col="white", lwd=0.3)
-				mtext(paste0(clades[h]," - NRR",i), side=3, line=-2.0, at=103, col="gray30", cex=0.5)
+				mtext(paste0(gsub("_late","",clades[h])," - NRR",i), side=3, line=-2.0, at=103, col="gray30", cex=0.5)
 				for (j in 1:length(polygons))
 					{
 						for (k in 1:length(polygons[[j]]@polygons))
 							{
-								polygons[[j]]@polygons[[k]] = checkPolygonsHoles(polygons[[j]]@polygons[[k]])
+								# polygons[[j]]@polygons[[k]] = checkPolygonsHoles(polygons[[j]]@polygons[[k]])
 							}
 						pol = polygons[[j]]; crs(pol) = crs(background)
 						if (croppingPolygons == TRUE) pol = crop(pol, provinces)
@@ -1957,7 +2014,7 @@ for (g in 1:2) { for (h in 1:length(clades)) {
 								points(mcc[j,"endLon"], mcc[j,"endLat"], pch=5, col="gray30", lwd=0.2, cex=0.35)
 							}
 					}
-				selectedDates = c(-10000, -3000, 0, 1000, 1500, 1900, 2000, 2020); selectedLabels = selectedDates
+				selectedDates = c(-1000000, -100000, -10000, -3000, 0, 1000, 1500, 1900, 2000, 2020); selectedLabels = selectedDates
 				for (j in 1:length(selectedDates))
 					{
 						if (logTransformation1 == TRUE)
@@ -1977,7 +2034,7 @@ for (g in 1:2) { for (h in 1:length(clades)) {
 			 		 legend.args=list(text="", cex=0.7, col="gray30"), horizontal=F,
 					 axis.args=list(cex.axis=0.5, lwd=0, lwd.tick=0.2, tck=-1.2, col.tick="gray30", col="gray30", col.axis="gray30",
 					 				line=0, mgp=c(0,0.45,0), at=selectedDates, labels=selectedLabels))
-			}
+			}}
 		dev.off()
 	}}
 
