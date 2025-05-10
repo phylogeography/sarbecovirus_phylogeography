@@ -1,0 +1,33 @@
+#!/bin/zsh
+
+treeannotator -burnin 0 -heights keep -hpd2D 0.8 PoWTransformed_SC1_NRR1.trees PoWTransformed_SC1_NRR1.MCC.tre
+treeannotator -burnin 0 -heights keep -hpd2D 0.8 PoWTransformed_SC1_NRR2.trees PoWTransformed_SC1_NRR2.MCC.tre
+treeannotator -burnin 0 -heights keep -hpd2D 0.8 PoWTransformed_SC1_NRR3.trees PoWTransformed_SC1_NRR3.MCC.tre
+treeannotator -burnin 0 -heights keep -hpd2D 0.8 PoWTransformed_SC1_NRR4.trees PoWTransformed_SC1_NRR4.MCC.tre
+treeannotator -burnin 0 -heights keep -hpd2D 0.8 PoWTransformed_SC1_NRR5.trees PoWTransformed_SC1_NRR5.MCC.tre
+treeannotator -burnin 0 -heights keep -hpd2D 0.8 PoWTransformed_SC1_NRR6.trees PoWTransformed_SC1_NRR6.MCC.tre
+treeannotator -burnin 0 -heights keep -hpd2D 0.8 PoWTransformed_SC1_NRR7.trees PoWTransformed_SC1_NRR7.MCC.tre
+treeannotator -burnin 0 -heights keep -hpd2D 0.8 PoWTransformed_SC1_NRR8.trees PoWTransformed_SC1_NRR8.MCC.tre
+treeannotator -burnin 0 -heights keep -hpd2D 0.8 PoWTransformed_SC1_NRR9.trees PoWTransformed_SC1_NRR9.MCC.tre
+treeannotator -burnin 0 -heights keep -hpd2D 0.8 PoWTransformed_SC1_NRR10.trees PoWTransformed_SC1_NRR10.MCC.tre
+treeannotator -burnin 0 -heights keep -hpd2D 0.8 PoWTransformed_SC1_NRR11.trees PoWTransformed_SC1_NRR11.MCC.tre
+treeannotator -burnin 0 -heights keep -hpd2D 0.8 PoWTransformed_SC1_NRR12.trees PoWTransformed_SC1_NRR12.MCC.tre
+treeannotator -burnin 0 -heights keep -hpd2D 0.8 PoWTransformed_SC1_NRR13.trees PoWTransformed_SC1_NRR13.MCC.tre
+treeannotator -burnin 0 -heights keep -hpd2D 0.8 PoWTransformed_SC1_NRR14.trees PoWTransformed_SC1_NRR14.MCC.tre
+treeannotator -burnin 0 -heights keep -hpd2D 0.8 PoWTransformed_SC1_NRR15.trees PoWTransformed_SC1_NRR15.MCC.tre
+treeannotator -burnin 0 -heights keep -hpd2D 0.8 PoWTransformed_SC1_NRR16.trees PoWTransformed_SC1_NRR16.MCC.tre
+treeannotator -burnin 0 -heights keep -hpd2D 0.8 PoWTransformed_SC1_NRR17.trees PoWTransformed_SC1_NRR17.MCC.tre
+treeannotator -burnin 0 -heights keep -hpd2D 0.8 PoWTransformed_SC1_NRR18.trees PoWTransformed_SC1_NRR18.MCC.tre
+treeannotator -burnin 0 -heights keep -hpd2D 0.8 PoWTransformed_SC1_NRR19.trees PoWTransformed_SC1_NRR19.MCC.tre
+treeannotator -burnin 0 -heights keep -hpd2D 0.8 PoWTransformed_SC1_NRR20.trees PoWTransformed_SC1_NRR20.MCC.tre
+treeannotator -burnin 0 -heights keep -hpd2D 0.8 PoWTransformed_SC1_NRR21.trees PoWTransformed_SC1_NRR21.MCC.tre
+treeannotator -burnin 0 -heights keep -hpd2D 0.8 PoWTransformed_SC1_NRR22.trees PoWTransformed_SC1_NRR22.MCC.tre
+treeannotator -burnin 0 -heights keep -hpd2D 0.8 PoWTransformed_SC1_NRR23.trees PoWTransformed_SC1_NRR23.MCC.tre
+treeannotator -burnin 0 -heights keep -hpd2D 0.8 PoWTransformed_SC1_NRR24.trees PoWTransformed_SC1_NRR24.MCC.tre
+treeannotator -burnin 0 -heights keep -hpd2D 0.8 PoWTransformed_SC1_NRR25.trees PoWTransformed_SC1_NRR25.MCC.tre
+treeannotator -burnin 0 -heights keep -hpd2D 0.8 PoWTransformed_SC1_NRR26.trees PoWTransformed_SC1_NRR26.MCC.tre
+treeannotator -burnin 0 -heights keep -hpd2D 0.8 PoWTransformed_SC1_NRR27.trees PoWTransformed_SC1_NRR27.MCC.tre
+treeannotator -burnin 0 -heights keep -hpd2D 0.8 PoWTransformed_SC1_NRR28.trees PoWTransformed_SC1_NRR28.MCC.tre
+treeannotator -burnin 0 -heights keep -hpd2D 0.8 PoWTransformed_SC1_NRR29.trees PoWTransformed_SC1_NRR29.MCC.tre
+treeannotator -burnin 0 -heights keep -hpd2D 0.8 PoWTransformed_SC1_NRR30.trees PoWTransformed_SC1_NRR30.MCC.tre
+treeannotator -burnin 0 -heights keep -hpd2D 0.8 PoWTransformed_SC1_NRR31.trees PoWTransformed_SC1_NRR31.MCC.tre
